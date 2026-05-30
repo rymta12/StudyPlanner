@@ -1,0 +1,3 @@
+-keep class com.studyplanner.app.core.data.local.entity.** { *; }
+-keep class com.google.firebase.** { *; }
+-dontwarn com.google.firebase.**
