@@ -6,6 +6,8 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavController
 import com.studyplanner.app.core.navigation.Route
@@ -52,8 +54,8 @@ fun HomeScreen(navController: NavController) {
             }
         }
     ) { padding ->
-        androidx.compose.foundation.layout.Box(
-            modifier = androidx.compose.ui.Modifier.padding(padding)
+        Box(
+            modifier = Modifier.padding(padding)
         ) {
             when (selectedTab) {
                 0 -> HomeDashboardScreen(
@@ -62,10 +64,14 @@ fun HomeScreen(navController: NavController) {
                 1 -> TimetableScreen(
                     onSessionClick = { navController.navigate(Route.Session.go(it)) }
                 )
-                2 -> ProgressAnalyticsTab()
-                3 -> LeaderboardScreen()
+                2 -> ProgressAnalyticsTab(navController)
+                3 -> LeaderboardScreen(
+                    onCompetitor = { navController.navigate(Route.Competitor.path) }
+                )
                 4 -> SettingsScreen(
-                    onNavigateToProfile = { navController.navigate(Route.Profile.path) }
+                    onNavigateToProfile = { navController.navigate(Route.Profile.path) },
+                    onNavigateToWeeklyReview = { navController.navigate(Route.WeeklyReview.path) }
+
                 )
             }
         }
@@ -73,10 +79,10 @@ fun HomeScreen(navController: NavController) {
 }
 
 @Composable
-private fun ProgressAnalyticsTab() {
+private fun ProgressAnalyticsTab(navController: NavController) {
     var subTab by remember { mutableIntStateOf(0) }
-    androidx.compose.foundation.layout.Column(
-        modifier = androidx.compose.ui.Modifier.fillMaxSize()
+    Column(
+        modifier = Modifier.fillMaxSize()
     ) {
         TabRow(selectedTabIndex = subTab) {
             Tab(selected = subTab == 0, onClick = { subTab = 0 },
@@ -87,7 +93,9 @@ private fun ProgressAnalyticsTab() {
                 icon = { Icon(Icons.Default.Analytics, null) })
         }
         when (subTab) {
-            0 -> ProgressScreen()
+            0 -> ProgressScreen(
+                onSubjectClick = { navController.navigate(Route.SubjectDetail.go(it)) }
+            )
             1 -> AnalyticsScreen()
         }
     }
@@ -95,9 +103,9 @@ private fun ProgressAnalyticsTab() {
 
 @Composable
 private fun PlaceholderTab(text: String) {
-    androidx.compose.foundation.layout.Box(
-        modifier = androidx.compose.ui.Modifier.fillMaxSize(),
-        contentAlignment = androidx.compose.ui.Alignment.Center
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
     ) {
         Text(text, style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant)

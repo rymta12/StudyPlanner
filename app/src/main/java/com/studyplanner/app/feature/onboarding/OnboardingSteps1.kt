@@ -1,5 +1,6 @@
 package com.studyplanner.app.feature.onboarding
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -10,6 +11,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -235,9 +237,19 @@ fun StepStudyMaterial(
 fun StepSubjects(
     state: OnboardingState,
     viewModel: OnboardingViewModel,
+    ocrResult: List<ChapterDraft>?,
+    onScanRequest: () -> Unit,
+    onClearOcrResult: () -> Unit,
     onNext: () -> Unit
 ) {
     var showAddSubject by remember { mutableStateOf(false) }
+
+    // Agar OCR scan se data lekar user wapas aata hai, toh sheet automatically open ho jayegi
+    LaunchedEffect(ocrResult) {
+        if (ocrResult != null) {
+            showAddSubject = true
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -247,11 +259,17 @@ fun StepSubjects(
         if (showAddSubject) {
             AddSubjectSheet(
                 studyMaterials = state.studyMaterials,
+                initialChapters = ocrResult ?: emptyList(),
+                onOcrScan = onScanRequest,
                 onAdd = { subject ->
                     viewModel.addSubject(subject)
                     showAddSubject = false
+                    onClearOcrResult() // Data consume hone ke baad clear karein
                 },
-                onDismiss = { showAddSubject = false }
+                onDismiss = {
+                    showAddSubject = false
+                    onClearOcrResult() // Cancel karne par bhi clean-up
+                }
             )
         } else {
             LazyColumn(
@@ -261,10 +279,17 @@ fun StepSubjects(
             ) {
                 item {
                     Column {
-                        Text("Add Your Subjects 📚", style = MaterialTheme.typography.headlineSmall,
-                            fontWeight = FontWeight.Bold, color = Color.White)
-                        Text("Add all subjects you want to study",
-                            style = MaterialTheme.typography.bodyMedium, color = Color.White.copy(alpha = 0.7f))
+                        Text(
+                            text = "Add Your Subjects 📚",
+                            style = MaterialTheme.typography.headlineSmall,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
+                        )
+                        Text(
+                            text = "Add all subjects you want to study",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = Color.White.copy(alpha = 0.7f)
+                        )
                     }
                 }
 
@@ -304,11 +329,18 @@ fun StepSubjects(
 
             Button(
                 onClick = onNext,
-                modifier = Modifier.fillMaxWidth().height(52.dp).padding(bottom = 0.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(52.dp)
+                    .padding(bottom = 0.dp),
                 enabled = state.subjects.isNotEmpty(),
                 colors = ButtonDefaults.buttonColors(containerColor = Color.White)
             ) {
-                Text("Continue", color = LocalAppTheme.current.colors.primary, fontWeight = FontWeight.Bold)
+                Text(
+                    text = "Continue",
+                    color = LocalAppTheme.current.colors.primary,
+                    fontWeight = FontWeight.Bold
+                )
             }
             Spacer(Modifier.height(16.dp))
         }
@@ -348,6 +380,8 @@ private fun SubjectSummaryCard(subject: SubjectDraft, onRemove: () -> Unit) {
 @Composable
 private fun AddSubjectSheet(
     studyMaterials: List<String>,
+    initialChapters: List<ChapterDraft>,
+    onOcrScan: () -> Unit,
     onAdd: (SubjectDraft) -> Unit,
     onDismiss: () -> Unit
 ) {
@@ -357,10 +391,25 @@ private fun AddSubjectSheet(
     var totalPages by remember { mutableStateOf("") }
     var readingSpeed by remember { mutableStateOf("2") }
     var videoMinutes by remember { mutableStateOf("") }
-    var chapters by remember { mutableStateOf<List<ChapterDraft>>(emptyList()) }
+
+    // Chapters list ko state mein hold kiya hai aur initial OCR lists se initialize kiya hai
+    var chapters by remember { mutableStateOf(initialChapters) }
+
+    // Manual chapter add karne ke liye fields
     var chapterName by remember { mutableStateOf("") }
     var chapterStart by remember { mutableStateOf("") }
     var chapterEnd by remember { mutableStateOf("") }
+
+    // Agar sheet open rehte hue bhi fresh OCR data mile, toh list append ho jaye
+    LaunchedEffect(initialChapters) {
+        if (initialChapters.isNotEmpty()) {
+            // Sirf wahi chapters append karein jo pehle se list mein na hon (Duplicate handling)
+            val newChapters = initialChapters.filter { fresh ->
+                chapters.none { existing -> existing.name == fresh.name }
+            }
+            chapters = chapters + newChapters
+        }
+    }
 
     val colors = listOf("#1565C0", "#E65100", "#2E7D32", "#6A1B9A", "#C62828", "#FF8F00", "#00838F")
 
@@ -371,22 +420,46 @@ private fun AddSubjectSheet(
             .padding(bottom = 16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        // TOP BAR WITH BACK AND SCAN INDEX
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             IconButton(onClick = onDismiss) {
-                Icon(Icons.Default.ArrowBack, null, tint = Color.White)
+                Icon(Icons.AutoMirrored.Filled.ArrowBack, null, tint = Color.White)
             }
-            Text("Add Subject", style = MaterialTheme.typography.titleLarge,
-                color = Color.White, fontWeight = FontWeight.Bold)
+            Text(
+                text = "Add Subject",
+                style = MaterialTheme.typography.titleLarge,
+                color = Color.White,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.weight(1f)
+            )
+
+            // Scan Index Button
+            OutlinedButton(
+                onClick = onOcrScan,
+                colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.White),
+                border = BorderStroke(1.dp, Color.White.copy(alpha = 0.5f))
+            ) {
+                Icon(Icons.Default.DocumentScanner, null, modifier = Modifier.size(16.dp))
+                Spacer(Modifier.width(4.dp))
+                Text("Scan Index", style = MaterialTheme.typography.labelMedium)
+            }
         }
 
+        // SUBJECT NAME
         OutlinedTextField(
-            value = subjectName, onValueChange = { subjectName = it },
+            value = subjectName,
+            onValueChange = { subjectName = it },
             label = { Text("Subject Name") },
             modifier = Modifier.fillMaxWidth(),
             singleLine = true,
             colors = outlinedTextFieldWhiteColors()
         )
 
+        // COLOR PICKER
         Text("Color", style = MaterialTheme.typography.labelMedium, color = Color.White)
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             colors.forEach { colorHex ->
@@ -405,14 +478,20 @@ private fun AddSubjectSheet(
             }
         }
 
+        // PRIORITY PICKER
         Text("Priority", style = MaterialTheme.typography.labelMedium, color = Color.White)
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             listOf("HIGH" to "🔴 High", "MEDIUM" to "🟡 Medium", "LOW" to "🟢 Low").forEach { (id, label) ->
-                SelectionChip(text = label, selected = priority == id,
-                    onClick = { priority = id }, modifier = Modifier.weight(1f))
+                SelectionChip(
+                    text = label,
+                    selected = priority == id,
+                    onClick = { priority = id },
+                    modifier = Modifier.weight(1f)
+                )
             }
         }
 
+        // STUDY MATERIAL CONDITIONAL FIELDS
         if ("BOOK" in studyMaterials || "NOTES_PDF" in studyMaterials) {
             OutlinedTextField(
                 value = totalPages, onValueChange = { totalPages = it },
@@ -440,34 +519,58 @@ private fun AddSubjectSheet(
             )
         }
 
-        Text("Chapters (from index)", style = MaterialTheme.typography.labelMedium, color = Color.White)
+        // DYNAMIC CHAPTERS LIST (Shows mixed: OCR + Manual items)
+        Text(
+            text = "Chapters (${chapters.size} added)",
+            style = MaterialTheme.typography.labelMedium,
+            color = Color.White
+        )
 
         chapters.forEachIndexed { i, ch ->
-            Card(colors = CardDefaults.cardColors(containerColor = Color.White.copy(alpha = 0.1f)),
-                shape = RoundedCornerShape(8.dp)) {
-                Row(modifier = Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
-                    Text("${i + 1}. ${ch.name} (pg ${ch.pageStart}-${ch.pageEnd})",
-                        color = Color.White, modifier = Modifier.weight(1f),
-                        style = MaterialTheme.typography.bodySmall)
-                    IconButton(onClick = {
-                        chapters = chapters.toMutableList().also { it.removeAt(i) }
-                    }, modifier = Modifier.size(24.dp)) {
+            Card(
+                colors = CardDefaults.cardColors(containerColor = Color.White.copy(alpha = 0.1f)),
+                shape = RoundedCornerShape(8.dp)
+            ) {
+                Row(
+                    modifier = Modifier.padding(12.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "${i + 1}. ${ch.name} (pg ${ch.pageStart}-${ch.pageEnd})",
+                        color = Color.White,
+                        modifier = Modifier.weight(1f),
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                    // Individual delete button (Chahe scan se aya ho ya manual se)
+                    IconButton(
+                        onClick = {
+                            chapters = chapters.toMutableList().also { it.removeAt(i) }
+                        },
+                        modifier = Modifier.size(24.dp)
+                    ) {
                         Icon(Icons.Default.Close, null, tint = Color.White.copy(alpha = 0.6f))
                     }
                 }
             }
         }
 
+        // MANUAL CHAPTER INPUT SECTION
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            OutlinedTextField(value = chapterName, onValueChange = { chapterName = it },
+            OutlinedTextField(
+                value = chapterName, onValueChange = { chapterName = it },
                 label = { Text("Chapter name") }, modifier = Modifier.weight(2f), singleLine = true,
-                colors = outlinedTextFieldWhiteColors())
-            OutlinedTextField(value = chapterStart, onValueChange = { chapterStart = it },
+                colors = outlinedTextFieldWhiteColors()
+            )
+            OutlinedTextField(
+                value = chapterStart, onValueChange = { chapterStart = it },
                 label = { Text("From") }, modifier = Modifier.weight(1f), singleLine = true,
-                colors = outlinedTextFieldWhiteColors())
-            OutlinedTextField(value = chapterEnd, onValueChange = { chapterEnd = it },
+                colors = outlinedTextFieldWhiteColors()
+            )
+            OutlinedTextField(
+                value = chapterEnd, onValueChange = { chapterEnd = it },
                 label = { Text("To") }, modifier = Modifier.weight(1f), singleLine = true,
-                colors = outlinedTextFieldWhiteColors())
+                colors = outlinedTextFieldWhiteColors()
+            )
         }
 
         TextButton(
@@ -485,9 +588,10 @@ private fun AddSubjectSheet(
         ) {
             Icon(Icons.Default.Add, null, tint = Color.White)
             Spacer(Modifier.width(4.dp))
-            Text("Add Chapter", color = Color.White)
+            Text("Add Chapter Manually", color = Color.White)
         }
 
+        // FINAL SAVE BUTTON
         Button(
             onClick = {
                 onAdd(SubjectDraft(
@@ -497,14 +601,20 @@ private fun AddSubjectSheet(
                     totalPages = totalPages.toIntOrNull() ?: 0,
                     readingSpeedMinPerPage = readingSpeed.toFloatOrNull() ?: 2f,
                     totalVideoMinutes = videoMinutes.toIntOrNull() ?: 0,
-                    chapters = chapters
+                    chapters = chapters // Final mixed list ViewModel me jayegi
                 ))
             },
-            modifier = Modifier.fillMaxWidth().height(52.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(52.dp),
             enabled = subjectName.isNotBlank(),
             colors = ButtonDefaults.buttonColors(containerColor = Color.White)
         ) {
-            Text("Add Subject", color = LocalAppTheme.current.colors.primary, fontWeight = FontWeight.Bold)
+            Text(
+                text = "Add Subject",
+                color = LocalAppTheme.current.colors.primary,
+                fontWeight = FontWeight.Bold
+            )
         }
     }
 }

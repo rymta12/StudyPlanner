@@ -293,6 +293,13 @@ class OnboardingViewModel @Inject constructor(
         }
     }
 
+    fun addOcrChapters(chapters: List<ChapterDraft>) {
+        val currentSubjects = _state.value.subjects.toMutableList()
+        val lastSubject = currentSubjects.lastOrNull() ?: return
+        val updated = lastSubject.copy(chapters = lastSubject.chapters + chapters)
+        currentSubjects[currentSubjects.lastIndex] = updated
+        _state.update { it.copy(subjects = currentSubjects) }
+    }
     private fun generateParentCode(uid: String): String =
         uid.take(4).uppercase() + "-" + (1000..9999).random().toString()
 }

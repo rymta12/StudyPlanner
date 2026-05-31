@@ -22,8 +22,9 @@ import com.studyplanner.app.core.data.local.entity.*
         StreakEntity::class,
         BreakSettingsEntity::class,
         VisionBoardEntity::class,
+        ReflectionEntity::class,
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -41,4 +42,5 @@ abstract class StudyPlannerDatabase : RoomDatabase() {
     abstract fun streakDao(): StreakDao
     abstract fun breakSettingsDao(): BreakSettingsDao
     abstract fun visionBoardDao(): VisionBoardDao
+    abstract fun reflectionDao(): ReflectionDao
 }

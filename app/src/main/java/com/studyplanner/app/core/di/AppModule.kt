@@ -38,6 +38,13 @@ object AppModule {
     @Provides fun provideBreakSettingsDao(db: StudyPlannerDatabase) = db.breakSettingsDao()
     @Provides fun provideVisionBoardDao(db: StudyPlannerDatabase) = db.visionBoardDao()
 
+    @Provides fun provideReflectionDao(db: StudyPlannerDatabase) = db.reflectionDao()
+
+    @Provides @Singleton
+    fun provideStudyDebtBadge(@ApplicationContext context: Context) =
+        com.studyplanner.app.core.util.StudyDebtBadge(context)
+
+
     @Provides @Singleton fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
     @Provides @Singleton fun provideFirestore(): FirebaseFirestore = FirebaseFirestore.getInstance()
 

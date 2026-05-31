@@ -21,12 +21,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavHostController
+import com.studyplanner.app.core.navigation.Route
 import com.studyplanner.app.ui.theme.*
 
 @Composable
 fun SettingsScreen(
     onNavigateToProfile: () -> Unit,
-    viewModel: SettingsViewModel = hiltViewModel()
+    viewModel: SettingsViewModel = hiltViewModel(),
+    onNavigateToWeeklyReview: () -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     var expandedSection by remember { mutableStateOf<String?>("appearance") }
@@ -153,6 +156,17 @@ fun SettingsScreen(
                     onManualSync = { viewModel.manualSync() }
                 )
             }
+        }
+
+        item {
+            SettingsNavItem(
+                icon = Icons.Default.Assessment,
+                title = "Weekly Self Review 📋",
+                subtitle = "Is hafte ka performance dekhein",
+                onClick = onNavigateToWeeklyReview
+            )
+            HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp),
+                color = MaterialTheme.colorScheme.outline.copy(0.15f))
         }
 
         item {

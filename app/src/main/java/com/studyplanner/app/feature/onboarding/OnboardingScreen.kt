@@ -16,15 +16,32 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavController
+import com.studyplanner.app.core.navigation.Route
 import com.studyplanner.app.ui.components.AnimatedBackground
 
 @Composable
 fun OnboardingScreen(
     onComplete: () -> Unit,
     onBack: () -> Unit,
+    navController: NavController,
     viewModel: OnboardingViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+
+    val ocrResult = navController
+        .currentBackStackEntry
+        ?.savedStateHandle
+        ?.getStateFlow<List<ChapterDraft>?>("ocr_result", null)
+        ?.collectAsStateWithLifecycle()
+
+    LaunchedEffect(ocrResult?.value) {
+        ocrResult?.value?.let { chapters ->
+            viewModel.addOcrChapters(chapters) // ViewModel mein add karo
+            navController.currentBackStackEntry
+                ?.savedStateHandle?.remove<List<ChapterDraft>>("ocr_result")
+        }
+    }
 
     BackHandler(enabled = state.currentStep > 0) { viewModel.prevStep() }
 
@@ -55,7 +72,20 @@ fun OnboardingScreen(
                     2 -> StepStudyMaterial(state = state, onNext = { materials ->
                         viewModel.updateStudyMaterials(materials); viewModel.nextStep()
                     })
-                    3 -> StepSubjects(state = state, viewModel = viewModel, onNext = { viewModel.nextStep() })
+                    3 -> StepSubjects(
+                        state = state, viewModel = viewModel, onNext = { viewModel.nextStep() },
+                        onScanRequest = {
+                            navController.navigate(
+                                Route.OcrScan.path
+                            )
+                        },
+                        ocrResult = ocrResult?.value,
+                        onClearOcrResult = {
+                            navController.currentBackStackEntry
+                                ?.savedStateHandle
+                                ?.set("ocr_result", null)
+                        },
+                    )
                     4 -> StepCurrentAffairs(state = state, onNext = { freq, dur ->
                         viewModel.updateCurrentAffairs(freq, dur); viewModel.nextStep()
                     })

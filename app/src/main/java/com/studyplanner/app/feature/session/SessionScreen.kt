@@ -36,10 +36,12 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.studyplanner.app.ui.components.AnimatedBackground
+import java.util.Calendar
 
 @Composable
 fun SessionScreen(
     onComplete: () -> Unit,
+    onNightReflection: () -> Unit,
     viewModel: SessionViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -92,7 +94,8 @@ fun SessionScreen(
                 SessionPhase.COMPLETE -> CompleteScreen(
                     state = state,
                     onDismissMilestone = { viewModel.dismissMilestone() },
-                    onDone = onComplete
+                    onDone = onComplete,
+                    onNightReflection = onNightReflection
                 )
 
                 SessionPhase.EXTENSION_DIALOG -> StudyScreen(
@@ -634,7 +637,8 @@ fun SessionScreen(
     private fun CompleteScreen(
         state: SessionUiState,
         onDismissMilestone: () -> Unit,
-        onDone: () -> Unit
+        onDone: () -> Unit,
+        onNightReflection: () -> Unit
     ) {
         val scale by animateFloatAsState(
             targetValue = 1f,
@@ -718,6 +722,15 @@ fun SessionScreen(
                         color = Color(0xFF1565C0),
                         fontWeight = FontWeight.Bold
                     )
+                    val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+                    if (hour >= 21) {
+                        TextButton(
+                            onClick = onNightReflection,
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text("🌙 Night Reflection karo")
+                        }
+                    }
                 }
             }
         }

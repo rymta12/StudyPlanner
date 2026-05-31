@@ -92,6 +92,8 @@ interface SessionDao {
     suspend fun countCompletedOnDate(uid: String, date: Long): Int
     @Query("SELECT COUNT(*) FROM sessions WHERE userUid = :uid AND scheduledDate = :date")
     suspend fun countTotalOnDate(uid: String, date: Long): Int
+    @Query("DELETE FROM sessions WHERE userUid = :uid AND status = 'UPCOMING'")
+    suspend fun deleteUpcoming(uid: String)
 }
 
 @Dao
@@ -164,4 +166,13 @@ interface PeriodSettingsDao {
     @Upsert suspend fun upsert(settings: PeriodSettingsEntity)
     @Query("SELECT * FROM period_settings WHERE userUid = :uid")
     fun observe(uid: String): Flow<PeriodSettingsEntity?>
+}
+
+@Dao
+interface ReflectionDao {
+    @Upsert suspend fun upsert(r: ReflectionEntity): Long
+    @Query("SELECT * FROM reflections WHERE userUid = :uid AND type = :type ORDER BY createdAt DESC")
+    fun observeByType(uid: String, type: String): Flow<List<ReflectionEntity>>
+    @Query("SELECT * FROM reflections WHERE userUid = :uid AND dateKey = :dateKey AND type = :type LIMIT 1")
+    suspend fun getByDateKey(uid: String, dateKey: String, type: String): ReflectionEntity?
 }

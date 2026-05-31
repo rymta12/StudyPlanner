@@ -229,3 +229,17 @@ data class VisionBoardEntity(
     val inspirationalImageUri: String,
     val updatedAt: Long
 )
+@Entity(tableName = "reflections")
+data class ReflectionEntity(
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    val userUid: String,
+    val type: String,            // "NIGHT" ya "WEEKLY"
+    val dateKey: String,         // night: "2026-05-30", weekly: "2026-W22"
+    val mood: Int,               // 1..5 (sirf night), weekly me 0
+    val wentWell: String,
+    val toImprove: String,
+    val tomorrowIntention: String,
+    val studyMinutes: Int,
+    val completionPercent: Int,
+    val createdAt: Long,
+)

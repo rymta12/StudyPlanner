@@ -21,34 +21,59 @@ class TimetableGenerator @Inject constructor(
         val slots = studySlotDao.getAll(uid)
         val routines = personalRoutineDao.getAll(uid)
         val breakSettings = breakSettingsDao.get(uid) ?: defaultBreakSettings(uid)
+        val block = breakSettings.studyMinutes.coerceAtLeast(10)
 
         val today = startOfDay(System.currentTimeMillis())
         val sessions = mutableListOf<SessionEntity>()
 
         subjects.forEach { subject ->
             val chapters = chapterDao.getBySubject(subject.id)
-            chapters.forEach { chapter ->
-                val topics = topicDao.getByChapter(chapter.id)
-                topics.filter { it.status == "PENDING" }.forEach { topic ->
-                    sessions.add(buildSession(uid, subject, chapter, topic, breakSettings))
+
+            if (chapters.isEmpty()) {
+                // Subject me chapters nahi → poore subject ke estimated time ko blocks me todo
+                val mins = subject.estimatedTotalMinutes.takeIf { it > 0 } ?: block
+                repeat(blockCount(mins, block)) {
+                    sessions.add(buildSession(uid, subject.id, 0L, 0L, breakSettings))
                 }
-                if (topics.isEmpty()) {
-                    sessions.add(buildSessionFromChapter(uid, subject, chapter, breakSettings))
+            } else {
+                chapters.forEach { chapter ->
+                    val topics = topicDao.getByChapter(chapter.id).filter { it.status == "PENDING" }
+                    if (topics.isNotEmpty()) {
+                        topics.forEach { topic ->
+                            val mins = topic.estimatedMinutes.takeIf { it > 0 } ?: block
+                            repeat(blockCount(mins, block)) {
+                                sessions.add(buildSession(uid, subject.id, chapter.id, topic.id, breakSettings))
+                            }
+                        }
+                    } else {
+                        // Chapter me topics nahi → chapter ke estimated time ko blocks me todo
+                        val mins = chapter.estimatedMinutes.takeIf { it > 0 } ?: block
+                        repeat(blockCount(mins, block)) {
+                            sessions.add(buildSession(uid, subject.id, chapter.id, 0L, breakSettings))
+                        }
+                    }
                 }
             }
         }
+
+        // Purana auto-generated plan hata do, fir naya daalo (re-generate safe)
+        sessionDao.deleteUpcoming(uid)
 
         val scheduled = distributeSessionsToSlots(
             sessions = sessions,
             slots = slots,
             routines = routines,
             startDate = today,
-            endDate = targetDate,
+            endDate = if (targetDate > today) targetDate else today + 30L * 24 * 60 * 60 * 1000,
             uid = uid
         )
 
         scheduled.forEach { sessionDao.upsert(it) }
     }
+
+    /** kitne study-blocks chahiye for `mins` minutes (har block = `block` min) */
+    private fun blockCount(mins: Int, block: Int): Int =
+        ((mins + block - 1) / block).coerceAtLeast(1)
 
     private fun distributeSessionsToSlots(
         sessions: List<SessionEntity>,
@@ -58,6 +83,8 @@ class TimetableGenerator @Inject constructor(
         endDate: Long,
         uid: String
     ): List<SessionEntity> {
+        if (sessions.isEmpty() || slots.isEmpty()) return emptyList()
+
         val result = mutableListOf<SessionEntity>()
         val sessionQueue = ArrayDeque(sessions)
         var currentDate = startDate
@@ -72,11 +99,10 @@ class TimetableGenerator @Inject constructor(
 
             daySlots.forEach { slot ->
                 if (sessionQueue.isEmpty()) return@forEach
+                if (isBlockedByRoutine(routines, dayOfWeek, slot.startHour, slot.startMinute)) return@forEach
 
                 val slotStartMs = timeToMs(currentDate, slot.startHour, slot.startMinute)
                 val slotEndMs = timeToMs(currentDate, slot.endHour, slot.endMinute)
-
-                if (isBlockedByRoutine(routines, dayOfWeek, slot.startHour, slot.startMinute)) return@forEach
 
                 var cursor = slotStartMs
                 while (cursor < slotEndMs && sessionQueue.isNotEmpty()) {
@@ -120,15 +146,15 @@ class TimetableGenerator @Inject constructor(
 
     private fun buildSession(
         uid: String,
-        subject: SubjectEntity,
-        chapter: ChapterEntity,
-        topic: TopicEntity,
+        subjectId: Long,
+        chapterId: Long,
+        topicId: Long,
         breakSettings: BreakSettingsEntity
     ) = SessionEntity(
         userUid = uid,
-        subjectId = subject.id,
-        chapterId = chapter.id,
-        topicId = topic.id,
+        subjectId = subjectId,
+        chapterId = chapterId,
+        topicId = topicId,
         subtopicId = 0L,
         scheduledDate = 0L,
         scheduledStartTime = 0L,
@@ -153,18 +179,6 @@ class TimetableGenerator @Inject constructor(
         originalDate = 0L,
         createdAt = System.currentTimeMillis()
     )
-
-    private fun buildSessionFromChapter(
-        uid: String,
-        subject: SubjectEntity,
-        chapter: ChapterEntity,
-        breakSettings: BreakSettingsEntity
-    ) = buildSession(uid, subject, chapter, TopicEntity(
-        id = 0L, chapterId = chapter.id, name = chapter.name,
-        estimatedMinutes = chapter.estimatedMinutes, completedMinutes = 0,
-        status = "PENDING", difficultyLevel = "MEDIUM", orderIndex = 0,
-        lastStudiedAt = 0L, nextRevisionAt = 0L
-    ), breakSettings)
 
     private fun defaultBreakSettings(uid: String) = BreakSettingsEntity(
         userUid = uid, studyMinutes = 50, breakMinutes = 10,

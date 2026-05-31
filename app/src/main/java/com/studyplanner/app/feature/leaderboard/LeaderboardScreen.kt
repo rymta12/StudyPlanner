@@ -31,7 +31,9 @@ import com.studyplanner.app.ui.components.LoadingScreen
 import com.studyplanner.app.ui.theme.*
 
 @Composable
-fun LeaderboardScreen(viewModel: LeaderboardViewModel = hiltViewModel()) {
+fun LeaderboardScreen(viewModel: LeaderboardViewModel = hiltViewModel(),
+                      onCompetitor: () -> Unit,
+) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     var activeTab by remember { mutableIntStateOf(0) }
 
@@ -52,7 +54,7 @@ fun LeaderboardScreen(viewModel: LeaderboardViewModel = hiltViewModel()) {
         }
 
         when (activeTab) {
-            0 -> LeaderboardTab(state = state, onScopeChange = { viewModel.setScope(it) })
+            0 -> LeaderboardTab(state = state, onScopeChange = { viewModel.setScope(it) }, onCompetitor = onCompetitor)
             1 -> BadgesTab(badges = state.badges)
         }
     }
@@ -86,6 +88,7 @@ private fun LeaderboardHeader(state: LeaderboardUiState) {
 @Composable
 private fun LeaderboardTab(
     state: LeaderboardUiState,
+    onCompetitor: () -> Unit,
     onScopeChange: (LeaderboardScope) -> Unit
 ) {
     Column(modifier = Modifier.fillMaxSize()) {
@@ -101,23 +104,31 @@ private fun LeaderboardTab(
                     selected = selected,
                     onClick = { onScopeChange(scope) },
                     label = {
-                        Text(scope.name.lowercase().replaceFirstChar { it.uppercase() },
-                            style = MaterialTheme.typography.labelMedium)
+                        Text(
+                            scope.name.lowercase().replaceFirstChar { it.uppercase() },
+                            style = MaterialTheme.typography.labelMedium
+                        )
                     }
                 )
             }
         }
 
-        if (state.isLoading) { LoadingScreen(); return }
+        if (state.isLoading) {
+            LoadingScreen(); return
+        }
 
         if (state.error != null) {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text("😕", fontSize = 48.sp)
-                    Text("Could not load leaderboard",
-                        color = MaterialTheme.colorScheme.onSurfaceVariant)
-                    Text(state.error, style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text(
+                        "Could not load leaderboard",
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Text(
+                        state.error, style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
                 }
             }
             return
@@ -125,13 +136,19 @@ private fun LeaderboardTab(
 
         if (state.entries.isEmpty()) {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
                     Text("🏆", fontSize = 56.sp)
-                    Text("Be the first!", style = MaterialTheme.typography.titleLarge,
-                        fontWeight = FontWeight.Bold)
-                    Text("Complete sessions to appear here",
-                        color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text(
+                        "Be the first!", style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        "Complete sessions to appear here",
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
                 }
             }
             return
@@ -156,11 +173,27 @@ private fun LeaderboardTab(
                         Spacer(Modifier.height(8.dp))
                         HorizontalDivider()
                         Spacer(Modifier.height(8.dp))
-                        Text("Your Position", style = MaterialTheme.typography.labelMedium,
+                        Text(
+                            "Your Position", style = MaterialTheme.typography.labelMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            modifier = Modifier.padding(horizontal = 4.dp))
+                            modifier = Modifier.padding(horizontal = 4.dp)
+                        )
                         Spacer(Modifier.height(4.dp))
                         LeaderboardRow(entry = myEntry)
+                        LeaderboardRow(entry = myEntry)
+
+                        Spacer(Modifier.height(8.dp))
+
+                        // ADD THIS
+                        OutlinedButton(
+                            onClick = { onCompetitor() },
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(12.dp)
+                        ) {
+                            Icon(Icons.Default.PersonSearch, null, modifier = Modifier.size(18.dp))
+                            Spacer(Modifier.width(8.dp))
+                            Text("👀 Apne competitors dekho")
+                        }
                     }
                 }
             }

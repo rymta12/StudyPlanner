@@ -28,7 +28,10 @@ import com.studyplanner.app.ui.components.LoadingScreen
 import com.studyplanner.app.ui.theme.*
 
 @Composable
-fun ProgressScreen(viewModel: ProgressViewModel = hiltViewModel()) {
+fun ProgressScreen(
+    onSubjectClick: (Long) -> Unit = {},
+    viewModel: ProgressViewModel = hiltViewModel()
+) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     if (state.isLoading) { LoadingScreen(); return }
@@ -58,7 +61,7 @@ fun ProgressScreen(viewModel: ProgressViewModel = hiltViewModel()) {
             }
         } else {
             items(state.subjectProgress) { sp ->
-                SubjectProgressCard(sp = sp)
+                SubjectProgressCard(sp = sp, onClick = { onSubjectClick(sp.subject.id) })
             }
         }
     }
@@ -197,7 +200,7 @@ private fun StatsGrid(state: ProgressUiState) {
 }
 
 @Composable
-private fun SubjectProgressCard(sp: SubjectProgress) {
+private fun SubjectProgressCard(sp: SubjectProgress, onClick: () -> Unit) {
     var expanded by remember { mutableStateOf(false) }
     val subjectColor = runCatching {
         Color(android.graphics.Color.parseColor(sp.subject.colorHex))
@@ -221,7 +224,7 @@ private fun SubjectProgressCard(sp: SubjectProgress) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clickable { expanded = !expanded }
+                    .clickable { expanded = !expanded; onClick() }
                     .padding(16.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
