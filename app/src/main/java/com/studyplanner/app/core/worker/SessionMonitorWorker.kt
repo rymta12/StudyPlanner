@@ -1,6 +1,7 @@
 package com.studyplanner.app.core.worker
 
 import android.content.Context
+import android.util.Log
 import androidx.hilt.work.HiltWorker
 import androidx.work.*
 import com.google.firebase.auth.FirebaseAuth
@@ -12,6 +13,7 @@ import com.studyplanner.app.core.util.NotificationHelper
 import com.studyplanner.app.core.util.ReschedulingEngine
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
+import kotlinx.coroutines.flow.first
 import java.util.Calendar
 import java.util.concurrent.TimeUnit
 
@@ -50,55 +52,79 @@ class SessionMonitorWorker @AssistedInject constructor(
         }
     }
 
+
+
     override suspend fun doWork(): Result {
+
         val uid = auth.currentUser?.uid ?: return Result.success()
+
         val now = System.currentTimeMillis()
         val gracePeriodMs = 3 * 60 * 1000L
         val today = startOfDay(now)
 
-        val todaySessions = mutableListOf<com.studyplanner.app.core.data.local.entity.SessionEntity>()
-        sessionDao.observeByDate(uid, today).collect { sessions ->
-            todaySessions.addAll(sessions)
-            return@collect
+        val todaySessions = try {
+            sessionDao.observeByDate(uid, today).first()
+        } catch (_: Exception) {
+            return Result.failure()
         }
 
-        todaySessions.filter { it.status == "UPCOMING" && now > it.scheduledStartTime + gracePeriodMs }
+        todaySessions
+            .filter {
+                it.status == "UPCOMING" &&
+                        now > it.scheduledStartTime + gracePeriodMs
+            }
             .forEach { session ->
                 sessionDao.updateStatus(session.id, "MISSED")
                 notificationHelper.showSessionMissed("Session")
                 reschedulingEngine.reschedule(uid, session)
             }
 
-        val user = userDao.get(uid)
         val streak = streakDao.get(uid)
 
-        val completedToday = todaySessions.count { it.status == "COMPLETED" }
+        val completedToday = todaySessions.count {
+            it.status == "COMPLETED"
+        }
+
         val totalToday = todaySessions.size
 
         if (totalToday > 0 && completedToday == totalToday) {
-            val currentStreak = streak?.currentDailyStreak ?: 0
             notificationHelper.showBreakReminder(10)
         }
 
         val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+
         if (hour == 21 && completedToday < totalToday) {
-            notificationHelper.showStreakReminder(streak?.currentDailyStreak ?: 0)
+            notificationHelper.showStreakReminder(
+                streak?.currentDailyStreak ?: 0
+            )
         }
 
         if (hour == 22) {
-            notificationHelper.showNightReflection(completedToday, totalToday,
-                streak?.currentDailyStreak ?: 0)
+            notificationHelper.showNightReflection(
+                completedToday,
+                totalToday,
+                streak?.currentDailyStreak ?: 0
+            )
         }
 
-        val upcomingSessions = todaySessions.filter {
-            it.status == "UPCOMING" && it.scheduledStartTime > now
-        }
-        upcomingSessions.forEach { session ->
-            val minutesUntil = ((session.scheduledStartTime - now) / 60000).toInt()
-            if (minutesUntil in 9..11) {
-                notificationHelper.showSessionReminder(session.id, "Study Session", 10)
+        todaySessions
+            .filter {
+                it.status == "UPCOMING" &&
+                        it.scheduledStartTime > now
             }
-        }
+            .forEach { session ->
+
+                val minutesUntil =
+                    ((session.scheduledStartTime - now) / 60000).toInt()
+
+                if (minutesUntil in 9..11) {
+                    notificationHelper.showSessionReminder(
+                        session.id,
+                        "Study Session",
+                        10
+                    )
+                }
+            }
 
         return Result.success()
     }

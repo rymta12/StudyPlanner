@@ -1,10 +1,13 @@
 package com.studyplanner.app.core.util
 
+import android.util.Log
 import com.studyplanner.app.core.data.local.dao.*
 import com.studyplanner.app.core.data.local.entity.*
 import java.util.Calendar
 import javax.inject.Inject
 import javax.inject.Singleton
+
+private const val TAG = "TimetableGen"
 
 @Singleton
 class TimetableGenerator @Inject constructor(
@@ -17,27 +20,42 @@ class TimetableGenerator @Inject constructor(
     private val breakSettingsDao: BreakSettingsDao,
 ) {
     suspend fun generate(uid: String, targetDate: Long) {
+        Log.d(TAG, "=== GENERATE START === uid=$uid targetDate=$targetDate")
         val subjects = subjectDao.getAll(uid)
         val slots = studySlotDao.getAll(uid)
         val routines = personalRoutineDao.getAll(uid)
         val breakSettings = breakSettingsDao.get(uid) ?: defaultBreakSettings(uid)
         val block = breakSettings.studyMinutes.coerceAtLeast(10)
 
+        Log.d(TAG, "subjects=${subjects.size}, slots=${slots.size}, routines=${routines.size}, block=${block}min")
+        subjects.forEach { Log.d(TAG, "SUBJECT: id=${it.id} name=${it.name} estMin=${it.estimatedTotalMinutes}") }
+        slots.forEach { Log.d(TAG, "SLOT: day=${it.dayOfWeek} ${it.startHour}:${String.format("%02d", it.startMinute)}-${it.endHour}:${String.format("%02d", it.endMinute)} active=${it.isActive}") }
+
+        if (slots.isEmpty()) {
+            Log.e(TAG, "ABORT: No study slots — timetable cannot be generated")
+            return
+        }
+        if (subjects.isEmpty()) {
+            Log.e(TAG, "ABORT: No subjects found")
+            return
+        }
+
         val today = startOfDay(System.currentTimeMillis())
         val sessions = mutableListOf<SessionEntity>()
 
         subjects.forEach { subject ->
             val chapters = chapterDao.getBySubject(subject.id)
+            Log.d(TAG, "Subject '${subject.name}': chapters=${chapters.size}")
 
             if (chapters.isEmpty()) {
-                // Subject me chapters nahi → poore subject ke estimated time ko blocks me todo
                 val mins = subject.estimatedTotalMinutes.takeIf { it > 0 } ?: block
-                repeat(blockCount(mins, block)) {
-                    sessions.add(buildSession(uid, subject.id, 0L, 0L, breakSettings))
-                }
+                val count = blockCount(mins, block)
+                Log.d(TAG, "  No chapters → $count session blocks")
+                repeat(count) { sessions.add(buildSession(uid, subject.id, 0L, 0L, breakSettings)) }
             } else {
                 chapters.forEach { chapter ->
                     val topics = topicDao.getByChapter(chapter.id).filter { it.status == "PENDING" }
+                    Log.d(TAG, "  Chapter '${chapter.name}': topics=${topics.size}")
                     if (topics.isNotEmpty()) {
                         topics.forEach { topic ->
                             val mins = topic.estimatedMinutes.takeIf { it > 0 } ?: block
@@ -46,17 +64,16 @@ class TimetableGenerator @Inject constructor(
                             }
                         }
                     } else {
-                        // Chapter me topics nahi → chapter ke estimated time ko blocks me todo
                         val mins = chapter.estimatedMinutes.takeIf { it > 0 } ?: block
-                        repeat(blockCount(mins, block)) {
-                            sessions.add(buildSession(uid, subject.id, chapter.id, 0L, breakSettings))
-                        }
+                        val count = blockCount(mins, block)
+                        Log.d(TAG, "  No topics → $count session blocks")
+                        repeat(count) { sessions.add(buildSession(uid, subject.id, chapter.id, 0L, breakSettings)) }
                     }
                 }
             }
         }
 
-        // Purana auto-generated plan hata do, fir naya daalo (re-generate safe)
+        Log.d(TAG, "Total sessions to schedule: ${sessions.size}")
         sessionDao.deleteUpcoming(uid)
 
         val scheduled = distributeSessionsToSlots(
@@ -68,7 +85,12 @@ class TimetableGenerator @Inject constructor(
             uid = uid
         )
 
+        Log.d(TAG, "Scheduled sessions: ${scheduled.size}")
+        if (scheduled.isEmpty()) Log.e(TAG, "WARNING: 0 sessions scheduled! Check slot times vs session duration")
+        scheduled.take(3).forEach { Log.d(TAG, "  → date=${it.scheduledDate} start=${it.scheduledStartTime}") }
+
         scheduled.forEach { sessionDao.upsert(it) }
+        Log.d(TAG, "=== GENERATE DONE === ${scheduled.size} sessions saved")
     }
 
     /** kitne study-blocks chahiye for `mins` minutes (har block = `block` min) */
@@ -104,7 +126,15 @@ class TimetableGenerator @Inject constructor(
                 val slotStartMs = timeToMs(currentDate, slot.startHour, slot.startMinute)
                 val slotEndMs = timeToMs(currentDate, slot.endHour, slot.endMinute)
 
-                var cursor = slotStartMs
+                // Past time skip karo — agar slot ka start abhi (now) se pehle hai to now se shuru karo
+                val nowMs = System.currentTimeMillis()
+                var cursor = if (slotStartMs < nowMs) {
+                    // Slot already shuru ho chuka — agar poora khatam ho gaya to skip
+                    if (slotEndMs <= nowMs) return@forEach
+                    // Beech mein hain — next 5-min boundary se shuru
+                    nowMs + (5 * 60 * 1000L - nowMs % (5 * 60 * 1000L))
+                } else slotStartMs
+
                 while (cursor < slotEndMs && sessionQueue.isNotEmpty()) {
                     val session = sessionQueue.removeFirst()
                     val duration = (session.studyMinutes + session.breakMinutes).toLong() * 60 * 1000

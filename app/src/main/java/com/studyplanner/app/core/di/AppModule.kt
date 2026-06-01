@@ -5,8 +5,32 @@ import androidx.room.Room
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.studyplanner.app.core.data.local.StudyPlannerDatabase
+import com.studyplanner.app.core.data.local.dao.BreakSettingsDao
+import com.studyplanner.app.core.data.local.dao.ChapterDao
+import com.studyplanner.app.core.data.local.dao.MorningAlarmDao
+import com.studyplanner.app.core.data.local.dao.PeriodSettingsDao
+import com.studyplanner.app.core.data.local.dao.PersonalRoutineDao
+import com.studyplanner.app.core.data.local.dao.SessionDao
+import com.studyplanner.app.core.data.local.dao.StreakDao
+import com.studyplanner.app.core.data.local.dao.StudySlotDao
+import com.studyplanner.app.core.data.local.dao.SubjectDao
+import com.studyplanner.app.core.data.local.dao.SubtopicDao
+import com.studyplanner.app.core.data.local.dao.TopicDao
+import com.studyplanner.app.core.data.local.dao.UserDao
+import com.studyplanner.app.core.data.local.dao.VisionBoardDao
+import com.studyplanner.app.core.data.repository.SessionRepository
+import com.studyplanner.app.core.sync.FirestoreSyncService
+import com.studyplanner.app.core.sync.SyncManager
 import com.studyplanner.app.core.util.AdManager
+import com.studyplanner.app.core.util.AlarmScheduler
+import com.studyplanner.app.core.util.AntiCheatManager
+import com.studyplanner.app.core.util.DistractionBlocker
+import com.studyplanner.app.core.util.GamificationManager
 import com.studyplanner.app.core.util.PremiumManager
+import com.studyplanner.app.core.util.ReschedulingEngine
+import com.studyplanner.app.core.util.StreakManager
+import com.studyplanner.app.core.util.StudyDebtBadge
+import com.studyplanner.app.core.util.TimetableGenerator
 import com.studyplanner.app.ui.theme.ThemeManager
 import dagger.Module
 import dagger.Provides
@@ -42,7 +66,7 @@ object AppModule {
 
     @Provides @Singleton
     fun provideStudyDebtBadge(@ApplicationContext context: Context) =
-        com.studyplanner.app.core.util.StudyDebtBadge(context)
+        StudyDebtBadge(context)
 
 
     @Provides @Singleton fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
@@ -59,73 +83,76 @@ object AppModule {
 
     @Provides @Singleton
     fun provideDistractionBlocker(@ApplicationContext context: Context) =
-        com.studyplanner.app.core.util.DistractionBlocker(context)
+        DistractionBlocker(context)
 
     @Provides @Singleton
     fun provideSyncManager(@ApplicationContext context: Context) =
-        com.studyplanner.app.core.sync.SyncManager(context)
+        SyncManager(context)
 
     @Provides @Singleton
     fun provideFirestoreSyncService(
         auth: FirebaseAuth, fs: FirebaseFirestore,
-        userDao: com.studyplanner.app.core.data.local.dao.UserDao,
-        subjectDao: com.studyplanner.app.core.data.local.dao.SubjectDao,
-        chapterDao: com.studyplanner.app.core.data.local.dao.ChapterDao,
-        topicDao: com.studyplanner.app.core.data.local.dao.TopicDao,
-        subtopicDao: com.studyplanner.app.core.data.local.dao.SubtopicDao,
-        studySlotDao: com.studyplanner.app.core.data.local.dao.StudySlotDao,
-        personalRoutineDao: com.studyplanner.app.core.data.local.dao.PersonalRoutineDao,
-        breakSettingsDao: com.studyplanner.app.core.data.local.dao.BreakSettingsDao,
-        morningAlarmDao: com.studyplanner.app.core.data.local.dao.MorningAlarmDao,
-        visionBoardDao: com.studyplanner.app.core.data.local.dao.VisionBoardDao,
-        periodSettingsDao: com.studyplanner.app.core.data.local.dao.PeriodSettingsDao,
-        streakDao: com.studyplanner.app.core.data.local.dao.StreakDao,
-    ) = com.studyplanner.app.core.sync.FirestoreSyncService(
+        userDao: UserDao,
+        subjectDao: SubjectDao,
+        chapterDao: ChapterDao,
+        topicDao: TopicDao,
+        subtopicDao: SubtopicDao,
+        studySlotDao: StudySlotDao,
+        personalRoutineDao: PersonalRoutineDao,
+        breakSettingsDao: BreakSettingsDao,
+        morningAlarmDao: MorningAlarmDao,
+        visionBoardDao: VisionBoardDao,
+        periodSettingsDao: PeriodSettingsDao,
+        streakDao: StreakDao,
+        timetableGenerator: TimetableGenerator,
+        @ApplicationContext context: Context
+    ) = FirestoreSyncService(
         auth, fs, userDao, subjectDao, chapterDao, topicDao, subtopicDao,
         studySlotDao, personalRoutineDao, breakSettingsDao, morningAlarmDao,
-        visionBoardDao, periodSettingsDao, streakDao
+        visionBoardDao, periodSettingsDao, streakDao, timetableGenerator,
+        context
     )
 
     @Provides @Singleton
     fun provideAntiCheatManager(@ApplicationContext context: Context) =
-        com.studyplanner.app.core.util.AntiCheatManager(context)
+        AntiCheatManager(context)
 
     @Provides @Singleton
     fun provideAlarmScheduler(
         @ApplicationContext context: Context,
-        morningAlarmDao: com.studyplanner.app.core.data.local.dao.MorningAlarmDao,
-    ) = com.studyplanner.app.core.util.AlarmScheduler(context, morningAlarmDao)
+        morningAlarmDao: MorningAlarmDao,
+    ) = AlarmScheduler(context, morningAlarmDao)
 
     @Provides @Singleton
     fun provideGamificationManager(
         auth: FirebaseAuth,
         fs: FirebaseFirestore,
-        userDao: com.studyplanner.app.core.data.local.dao.UserDao,
-        sessionDao: com.studyplanner.app.core.data.local.dao.SessionDao,
-        streakDao: com.studyplanner.app.core.data.local.dao.StreakDao,
-    ) = com.studyplanner.app.core.util.GamificationManager(auth, fs, userDao, sessionDao, streakDao)
+        userDao: UserDao,
+        sessionDao: SessionDao,
+        streakDao: StreakDao,
+    ) = GamificationManager(auth, fs, userDao, sessionDao, streakDao)
 
     @Provides @Singleton
     fun provideStreakManager(
-        streakDao: com.studyplanner.app.core.data.local.dao.StreakDao,
-        sessionDao: com.studyplanner.app.core.data.local.dao.SessionDao,
-        userDao: com.studyplanner.app.core.data.local.dao.UserDao,
-    ) = com.studyplanner.app.core.util.StreakManager(streakDao, sessionDao, userDao)
+        streakDao: StreakDao,
+        sessionDao: SessionDao,
+        userDao: UserDao,
+    ) = StreakManager(streakDao, sessionDao, userDao)
 
     @Provides @Singleton
     fun provideReschedulingEngine(
-        sessionDao: com.studyplanner.app.core.data.local.dao.SessionDao,
-        studySlotDao: com.studyplanner.app.core.data.local.dao.StudySlotDao,
-        personalRoutineDao: com.studyplanner.app.core.data.local.dao.PersonalRoutineDao,
-        userDao: com.studyplanner.app.core.data.local.dao.UserDao,
-    ) = com.studyplanner.app.core.util.ReschedulingEngine(sessionDao, studySlotDao, personalRoutineDao, userDao)
+        sessionDao: SessionDao,
+        studySlotDao: StudySlotDao,
+        personalRoutineDao: PersonalRoutineDao,
+        userDao: UserDao,
+    ) = ReschedulingEngine(sessionDao, studySlotDao, personalRoutineDao, userDao)
 
     @Provides @Singleton
     fun provideSessionRepository(
-        sessionDao: com.studyplanner.app.core.data.local.dao.SessionDao,
+        sessionDao: SessionDao,
         auth: FirebaseAuth,
         fs: FirebaseFirestore,
-        reschedulingEngine: com.studyplanner.app.core.util.ReschedulingEngine,
-        streakManager: com.studyplanner.app.core.util.StreakManager,
-    ) = com.studyplanner.app.core.data.repository.SessionRepository(sessionDao, auth, fs, reschedulingEngine, streakManager)
+        reschedulingEngine: ReschedulingEngine,
+        streakManager: StreakManager,
+    ) = SessionRepository(sessionDao, auth, fs, reschedulingEngine, streakManager)
 }

@@ -32,8 +32,21 @@ fun HomeDashboardScreen(
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val sessionAlert by viewModel.sessionAlert.collectAsStateWithLifecycle()
 
     if (state.isLoading) { LoadingScreen(); return }
+
+    // AUTO PRE-SESSION ALERT — session time aane pe automatically dialog
+    sessionAlert?.let { alertSession ->
+        SessionStartAlertDialog(
+            startTimeMs = alertSession.scheduledStartTime,
+            onStart = {
+                viewModel.clearAlertAfterStart()
+                onSessionClick(alertSession.id)
+            },
+            onDismiss = { viewModel.dismissSessionAlert() }
+        )
+    }
 
     LazyColumn(
         modifier = Modifier
@@ -324,5 +337,84 @@ private fun greeting(): String {
         hour < 17 -> "Good Afternoon ☀️"
         hour < 21 -> "Good Evening 🌆"
         else -> "Good Night 🌙"
+    }
+}
+
+@Composable
+private fun SessionStartAlertDialog(
+    startTimeMs: Long,
+    onStart: () -> Unit,
+    onDismiss: () -> Unit
+) {
+    // Grace countdown: 2 min = 120 sec. Iske baad warning, fir auto-dismiss (worker miss karega)
+    var secondsLeft by remember { mutableIntStateOf(120) }
+
+    LaunchedEffect(Unit) {
+        while (secondsLeft > 0) {
+            kotlinx.coroutines.delay(1000)
+            secondsLeft--
+        }
+        onDismiss()
+    }
+
+    val mins = secondsLeft / 60
+    val secs = secondsLeft % 60
+    val timeFmt = remember { SimpleDateFormat("hh:mm a", Locale.getDefault()) }
+
+    androidx.compose.ui.window.Dialog(onDismissRequest = {}) {
+        Card(
+            shape = RoundedCornerShape(24.dp),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            elevation = CardDefaults.cardElevation(16.dp)
+        ) {
+            Column(
+                modifier = Modifier.padding(28.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                Text("⏰", fontSize = 56.sp)
+                Text("Session shuru hone wala hai!",
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.ExtraBold,
+                    textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+                    color = MaterialTheme.colorScheme.onSurface)
+                Text("Scheduled: ${timeFmt.format(Date(startTimeMs))}",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant)
+
+                Box(
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(12.dp))
+                        .background(
+                            if (secondsLeft <= 30) Color(0xFFC62828).copy(0.15f)
+                            else MaterialTheme.colorScheme.primaryContainer
+                        )
+                        .padding(horizontal = 20.dp, vertical = 10.dp)
+                ) {
+                    Text(
+                        "Start karo nahi to miss ho jayega: ${mins}:${secs.toString().padStart(2, '0')}",
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = if (secondsLeft <= 30) Color(0xFFEF5350)
+                        else MaterialTheme.colorScheme.onPrimaryContainer
+                    )
+                }
+
+                Button(
+                    onClick = onStart,
+                    modifier = Modifier.fillMaxWidth().height(54.dp),
+                    shape = RoundedCornerShape(14.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2E7D32))
+                ) {
+                    Icon(Icons.Default.PlayArrow, null)
+                    Spacer(Modifier.width(8.dp))
+                    Text("Start Session 🚀", fontWeight = FontWeight.ExtraBold,
+                        style = MaterialTheme.typography.titleMedium)
+                }
+                TextButton(onClick = onDismiss) {
+                    Text("Abhi nahi (skip)", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
+            }
+        }
     }
 }

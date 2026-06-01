@@ -205,21 +205,27 @@ class OnboardingViewModel @Inject constructor(
             _state.update { it.copy(isLoading = true) }
             runCatching { saveAllData() }
                 .onSuccess { onSuccess() }
-                .onFailure { e -> _state.update { it.copy(isLoading = false, error = e.localizedMessage) } }
+                .onFailure { e ->
+                    android.util.Log.e("Onboarding", "saveAllData FAILED: ${e.message}", e)
+                    _state.update { it.copy(isLoading = false, error = e.localizedMessage) }
+                }
         }
     }
 
     private suspend fun saveAllData() {
         val uid = auth.currentUser?.uid ?: throw Exception("Not authenticated")
+        android.util.Log.d("Onboarding", "saveAllData START uid=$uid")
         val s = _state.value
+        android.util.Log.d("Onboarding", "subjects=${s.subjects.size} slots=${s.studySlots.size}")
 
+        val parentCode = generateParentCode(uid)
         userDao.upsert(UserEntity(
             uid = uid, name = s.name, email = auth.currentUser?.email ?: "",
             photoUrl = s.photoUri, gender = s.gender, city = s.city, state = s.state,
             examType = s.examType, examSubType = s.examSubType, targetDate = s.targetDate,
             dailyTargetHours = s.dailyStudyHours, points = 0, currentStreak = 0,
             longestStreak = 0, lastStudyDate = 0L, authenticityScore = 100,
-            isPremium = false, isPro = false, parentCode = generateParentCode(uid),
+            isPremium = false, isPro = false, parentCode = parentCode,
             linkedParentUid = "", createdAt = System.currentTimeMillis(),
             updatedAt = System.currentTimeMillis()
         ))
@@ -277,10 +283,18 @@ class OnboardingViewModel @Inject constructor(
             }
         }
 
-        firestore.collection("users").document(uid)
-            .set(mapOf("isOnboardingComplete" to true), com.google.firebase.firestore.SetOptions.merge()).await()
+        android.util.Log.d("Onboarding", "saveAllData: subjects=${s.subjects.size}, slots=${s.studySlots.size}, targetDate=${s.targetDate}")
 
+        firestore.collection("users").document(uid)
+            .set(mapOf(
+                "isOnboardingComplete" to true,
+                "parentCode" to parentCode,
+                "name" to s.name,
+            ), com.google.firebase.firestore.SetOptions.merge()).await()
+
+        android.util.Log.d("Onboarding", "Calling timetableGenerator.generate()")
         timetableGenerator.generate(uid, _state.value.targetDate)
+        android.util.Log.d("Onboarding", "timetableGenerator.generate() completed")
 
         morningAlarmDao.getEnabled(uid).forEach { alarm ->
             alarmScheduler.scheduleMorningAlarm(alarm, _state.value.name)
@@ -289,7 +303,12 @@ class OnboardingViewModel @Inject constructor(
         com.studyplanner.app.core.worker.SessionMonitorWorker.enqueue(context)
 
         if (syncManager.shouldSyncNow()) {
-            firestoreSyncService.uploadAll()
+            val result = firestoreSyncService.uploadAll()
+            result.onSuccess {
+                android.util.Log.d("Onboarding", "uploadAll SUCCESS - cloud backup done")
+            }.onFailure { e ->
+                android.util.Log.e("Onboarding", "uploadAll FAILED: ${e.message}", e)
+            }
         }
     }
 

@@ -33,6 +33,11 @@ class SessionRepository @Inject constructor(
     suspend fun getById(id: Long): SessionEntity? = sessionDao.getById(id)
 
     suspend fun startSession(id: Long, emotionBefore: String, studyMinutes: Int, breakMinutes: Int, musicUrl: String): SessionEntity? {
+        // GUARD: Pehle se koi ONGOING session hai (aur ye nahi) to use MISSED kar do
+        val existingOngoing = sessionDao.getOngoing(uid)
+        if (existingOngoing != null && existingOngoing.id != id) {
+            sessionDao.updateStatus(existingOngoing.id, "UPCOMING")
+        }
         val session = sessionDao.getById(id) ?: return null
         val updated = session.copy(
             actualStartTime = System.currentTimeMillis(),

@@ -84,12 +84,24 @@ class FocusMonitorService : Service() {
         })
     }
 
-    private fun buildNotification(): Notification =
-        NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle("🔒 Focus Mode Active")
-            .setContentText("Stay focused! Distractions are blocked 🔥")
+    private fun buildNotification(topicName: String = "Study Session"): Notification {
+        val pendingIntent = android.app.PendingIntent.getActivity(
+            this, 0,
+            android.content.Intent(this, com.studyplanner.app.MainActivity::class.java).apply {
+                flags = android.content.Intent.FLAG_ACTIVITY_NEW_TASK or android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
+            },
+            android.app.PendingIntent.FLAG_UPDATE_CURRENT or android.app.PendingIntent.FLAG_IMMUTABLE
+        )
+        return NotificationCompat.Builder(this, CHANNEL_ID)
+            .setContentTitle("🍅 Session Active — $topicName")
+            .setContentText("Focus mode ON • Tap to open timer")
             .setSmallIcon(R.mipmap.ic_launcher)
-            .setOngoing(true).setSilent(true).build()
+            .setOngoing(true)
+            .setSilent(true)
+            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+            .setContentIntent(pendingIntent)
+            .build()
+    }
 
     private fun createNotificationChannel() {
         val channel = NotificationChannel(CHANNEL_ID, "Focus Monitor", NotificationManager.IMPORTANCE_LOW)

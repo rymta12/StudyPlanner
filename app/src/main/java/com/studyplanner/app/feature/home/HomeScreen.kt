@@ -70,9 +70,8 @@ fun HomeScreen(navController: NavController) {
                 )
                 4 -> SettingsScreen(
                     onNavigateToProfile = { navController.navigate(Route.Profile.path) },
-                    onNavigateToWeeklyReview = { navController.navigate(Route.WeeklyReview.path) }
-
-                )
+                    onNavigateToOnboarding = { navController.navigate(Route.Onboarding.path) { popUpTo(0) } },
+                    onNavigateToWeeklyReview = { navController.navigate(Route.WeeklyReview.path) })
             }
         }
     }

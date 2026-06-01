@@ -7,6 +7,7 @@ import com.studyplanner.app.core.data.local.dao.*
 import com.studyplanner.app.core.data.local.entity.*
 import com.studyplanner.app.core.sync.FirestoreSyncService
 import com.studyplanner.app.core.sync.SyncManager
+import kotlinx.coroutines.tasks.await
 import com.studyplanner.app.ui.theme.AppTheme
 import com.studyplanner.app.ui.theme.AppThemes
 import com.studyplanner.app.ui.theme.BgAnimationStyle
@@ -29,6 +30,8 @@ data class SettingsUiState(
     val sessionReminderMinutes: Int = 10,
     val isLoading: Boolean = false,
     val syncSuccess: Boolean = false,
+    val timetableRegenSuccess: Boolean = false,
+    val onboardingReset: Boolean = false,
 )
 
 @HiltViewModel
@@ -42,6 +45,9 @@ class SettingsViewModel @Inject constructor(
     private val themeManager: ThemeManager,
     private val syncManager: SyncManager,
     private val firestoreSyncService: FirestoreSyncService,
+    private val timetableGenerator: com.studyplanner.app.core.util.TimetableGenerator,
+    private val firestore: com.google.firebase.firestore.FirebaseFirestore,
+    private val userDao: UserDao,
 ) : ViewModel() {
 
     private val uid get() = auth.currentUser?.uid ?: ""
@@ -98,9 +104,14 @@ class SettingsViewModel @Inject constructor(
 
     fun manualSync() {
         viewModelScope.launch {
-            _state.update { it.copy(isLoading = true) }
-            firestoreSyncService.uploadAll()
-            _state.update { it.copy(isLoading = false, syncSuccess = true) }
+            _state.update { it.copy(isLoading = true, syncSuccess = false) }
+            val result = firestoreSyncService.uploadAll()
+            result.onSuccess {
+                android.util.Log.d("ManualSync", "uploadAll SUCCESS")
+            }.onFailure {
+                android.util.Log.e("ManualSync", "uploadAll FAILED: ${it.message}", it)
+            }
+            _state.update { it.copy(isLoading = false, syncSuccess = result.isSuccess) }
         }
     }
 
@@ -128,4 +139,37 @@ class SettingsViewModel @Inject constructor(
     }
 
     fun clearSyncSuccess() = _state.update { it.copy(syncSuccess = false) }
+
+    fun regenerateTimetable() {
+        viewModelScope.launch {
+            _state.update { it.copy(isLoading = true) }
+            runCatching {
+                val user = userDao.get(uid) ?: throw Exception("User not found")
+                timetableGenerator.generate(uid, user.targetDate)
+            }.onSuccess {
+                _state.update { it.copy(isLoading = false, timetableRegenSuccess = true) }
+            }.onFailure { e ->
+                android.util.Log.e("Settings", "Timetable regen failed: ${e.message}")
+                _state.update { it.copy(isLoading = false) }
+            }
+        }
+    }
+
+    fun redoOnboarding() {
+        viewModelScope.launch {
+            _state.update { it.copy(isLoading = true) }
+            runCatching {
+                firestore.collection("users").document(uid)
+                    .update("isOnboardingComplete", false)
+                    .await()
+            }.onSuccess {
+                _state.update { it.copy(isLoading = false, onboardingReset = true) }
+            }.onFailure {
+                _state.update { it.copy(isLoading = false) }
+            }
+        }
+    }
+
+    fun clearTimetableSuccess() = _state.update { it.copy(timetableRegenSuccess = false) }
+    fun clearOnboardingReset() = _state.update { it.copy(onboardingReset = false) }
 }

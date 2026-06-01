@@ -2,6 +2,7 @@ package com.studyplanner.app.core.navigation
 
 import android.util.Log
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -13,6 +14,7 @@ import com.studyplanner.app.feature.competitor.CompetitorScreen
 import com.studyplanner.app.feature.home.HomeScreen
 import com.studyplanner.app.feature.ocr.OcrScanScreen
 import com.studyplanner.app.feature.onboarding.OnboardingScreen
+import com.studyplanner.app.feature.onboarding.OnboardingViewModel
 import com.studyplanner.app.feature.parent.ParentDashboardScreen
 import com.studyplanner.app.feature.reflection.NightReflectionScreen
 import com.studyplanner.app.feature.reflection.WeeklyReviewScreen
@@ -87,8 +89,7 @@ fun StudyPlannerNavGraph(
                 onComplete = { navController.popBackStack() },
                 onNightReflection = {
                     navController.navigate(Route.NightReflection.path)
-                }
-            )
+                })
         }
         composable(
             route = Route.SubjectDetail.path,
@@ -109,8 +110,23 @@ fun StudyPlannerNavGraph(
         }
 
         composable(Route.OcrScan.path) {
+            val parentEntry = remember(it) {
+                navController.getBackStackEntry(Route.Onboarding.path)
+            }
+            val onboardingViewModel: OnboardingViewModel = androidx.hilt.navigation.compose.hiltViewModel(parentEntry)
             OcrScanScreen(
-                onConfirm = { _ -> navController.popBackStack() },  // topics list yahan handle karo
+                onConfirm = { lines ->
+                    val chapters = lines.mapIndexed { i, line ->
+                        com.studyplanner.app.feature.onboarding.ChapterDraft(
+                            name = line,
+                            pageStart = 1,
+                            pageEnd = 1,
+                            orderIndex = i
+                        )
+                    }
+                    onboardingViewModel.addOcrChapters(chapters)
+                    navController.popBackStack()
+                },
                 onBack = { navController.popBackStack() }
             )
         }

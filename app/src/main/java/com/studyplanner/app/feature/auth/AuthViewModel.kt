@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.*
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -28,6 +29,7 @@ data class AuthUiState(
 class AuthViewModel @Inject constructor(
     private val auth: FirebaseAuth,
     private val firestore: FirebaseFirestore,
+    private val firestoreSyncService: com.studyplanner.app.core.sync.FirestoreSyncService,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(AuthUiState())
@@ -42,7 +44,16 @@ class AuthViewModel @Inject constructor(
     fun login(email: String, password: String) {
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true, error = null) }
-            runCatching { auth.signInWithEmailAndPassword(email, password).await() }
+            runCatching {
+                auth.signInWithEmailAndPassword(email, password).await()
+                // Pehle download try karo
+
+                val dlResult = firestoreSyncService.downloadAll()
+                android.util.Log.d("AuthSync", "downloadAll: $dlResult")
+                dlResult.onFailure {
+                    android.util.Log.e("AuthSync", "downloadAll FAILED: ${it.message}", it)
+                }
+            }
                 .onSuccess { _state.update { it.copy(isLoading = false, isSuccess = true, isNewUser = false) } }
                 .onFailure { e -> _state.update { it.copy(isLoading = false, error = friendlyError(e)) } }
         }
@@ -95,7 +106,10 @@ class AuthViewModel @Inject constructor(
                 }
                 isNew
             }
-                .onSuccess { isNew -> _state.update { it.copy(isLoading = false, isSuccess = true, isNewUser = isNew) } }
+                .onSuccess { isNew ->
+                    if (!isNew) firestoreSyncService.downloadAll()
+                    _state.update { it.copy(isLoading = false, isSuccess = true, isNewUser = isNew) }
+                }
                 .onFailure { e -> _state.update { it.copy(isLoading = false, error = friendlyError(e)) } }
         }
     }

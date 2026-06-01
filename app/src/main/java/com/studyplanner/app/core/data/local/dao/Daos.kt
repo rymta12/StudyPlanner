@@ -94,6 +94,8 @@ interface SessionDao {
     suspend fun countTotalOnDate(uid: String, date: Long): Int
     @Query("DELETE FROM sessions WHERE userUid = :uid AND status = 'UPCOMING'")
     suspend fun deleteUpcoming(uid: String)
+    @Query("SELECT * FROM sessions WHERE userUid = :uid AND status = 'ONGOING' ORDER BY actualStartTime DESC LIMIT 1")
+    suspend fun getOngoing(uid: String): SessionEntity?
 }
 
 @Dao

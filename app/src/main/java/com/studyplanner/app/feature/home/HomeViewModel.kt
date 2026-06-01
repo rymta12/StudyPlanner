@@ -7,6 +7,7 @@ import com.studyplanner.app.core.data.local.dao.*
 import com.studyplanner.app.core.data.local.entity.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.Calendar
 import javax.inject.Inject
@@ -34,6 +35,55 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val uid get() = auth.currentUser?.uid ?: ""
+
+    // Session jo abhi start hone wala hai (alert dialog ke liye)
+    private val _sessionAlert = MutableStateFlow<SessionEntity?>(null)
+    val sessionAlert = _sessionAlert.asStateFlow()
+    private val dismissedAlertIds = mutableSetOf<Long>()
+
+    init {
+        startSessionWatcher()
+    }
+
+    /** Har 15 sec check karta hai — agar koi session ka time aa gaya (±2 min window) to alert dikhao */
+    private fun startSessionWatcher() {
+        val currentUid = auth.currentUser?.uid ?: return
+        viewModelScope.launch {
+            while (true) {
+                val now = System.currentTimeMillis()
+                val today = startOfDay()
+                val sessions = runCatching {
+                    sessionDao.observeByDate(currentUid, today).first()
+                }.getOrDefault(emptyList())
+
+                // Koi session ONGOING to nahi? to alert mat dikhao
+                val hasOngoing = sessions.any { it.status == "ONGOING" }
+
+                if (!hasOngoing) {
+                    // 2 min pehle se start time tak window
+                    val due = sessions.firstOrNull { s ->
+                        s.status == "UPCOMING" &&
+                                s.id !in dismissedAlertIds &&
+                                now >= s.scheduledStartTime - 2 * 60 * 1000L &&
+                                now <= s.scheduledStartTime + 3 * 60 * 1000L
+                    }
+                    _sessionAlert.value = due
+                } else {
+                    _sessionAlert.value = null
+                }
+                delay(15_000)
+            }
+        }
+    }
+
+    fun dismissSessionAlert() {
+        _sessionAlert.value?.let { dismissedAlertIds.add(it.id) }
+        _sessionAlert.value = null
+    }
+
+    fun clearAlertAfterStart() {
+        _sessionAlert.value = null
+    }
 
     val state: StateFlow<HomeUiState> = auth.currentUser?.uid?.let { currentUid ->
         combine(
