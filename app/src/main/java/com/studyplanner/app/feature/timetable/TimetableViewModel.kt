@@ -168,13 +168,13 @@ class TimetableViewModel @Inject constructor(
     }
 
     private suspend fun SessionEntity.toMeta(): SessionWithMeta {
-        val subject = subjectDao.getById(subjectId)
+        val subject = if (subjectId > 0) subjectDao.getById(subjectId) else null
         val topic = if (topicId > 0) topicDao.getById(topicId) else null
         return SessionWithMeta(
             session = this,
-            subjectName = subject?.name ?: "Study",
-            subjectColor = subject?.colorHex ?: "#1565C0",
-            topicName = topic?.name ?: subject?.name ?: "Session",
+            subjectName = if (isManual) "Extra Session" else subject?.name ?: "Study",
+            subjectColor = if (isManual) "#FF6F00" else subject?.colorHex ?: "#1565C0",
+            topicName = if (isManual) "⚡ Extra Study" else topic?.name ?: subject?.name ?: "Session",
         )
     }
 }

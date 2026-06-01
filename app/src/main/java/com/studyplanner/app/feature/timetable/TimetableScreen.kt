@@ -34,7 +34,7 @@ import java.util.*
 @Composable
 fun TimetableScreen(
     onSessionClick: (Long) -> Unit,
-    viewModel: TimetableViewModel = hiltViewModel(),
+    viewModel: TimetableViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -174,7 +174,9 @@ private fun TodayView(
         }
         items(sessions) { meta ->
             TodaySessionCard(meta = meta, onClick = {
-                if (meta.session.status == "UPCOMING" || meta.session.status == "ONGOING") onSessionClick(meta.session.id)
+                if (!meta.session.isManual &&
+                    (meta.session.status == "UPCOMING" || meta.session.status == "ONGOING"))
+                    onSessionClick(meta.session.id)
             })
         }
     }
@@ -264,6 +266,9 @@ private fun TodaySessionCard(meta: SessionWithMeta, onClick: () -> Unit) {
                 StatusChip(text = statusText, color = statusColor)
                 if (session.isRescheduled) {
                     StatusChip(text = "🔄", color = StatusRescheduled)
+                }
+                if (session.isManual) {
+                    StatusChip(text = "⚡ Extra", color = Color(0xFFFF6F00))
                 }
             }
         }

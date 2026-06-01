@@ -6,6 +6,7 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.studyplanner.app.MainActivity
 import com.studyplanner.app.R
@@ -185,6 +186,10 @@ class NotificationHelper @Inject constructor(
         intent: PendingIntent, priority: Int = NotificationCompat.PRIORITY_DEFAULT,
         ongoing: Boolean = false
     ) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (context.checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS)
+                != android.content.pm.PackageManager.PERMISSION_GRANTED) return
+        }
         val notification = NotificationCompat.Builder(context, channel)
             .setSmallIcon(R.mipmap.ic_launcher)
             .setContentTitle(title)

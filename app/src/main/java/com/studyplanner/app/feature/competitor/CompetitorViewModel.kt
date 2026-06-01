@@ -46,28 +46,36 @@ class CompetitorViewModel @Inject constructor(
 
     init { loadData() }
 
+
     private fun loadData() {
         viewModelScope.launch {
             val uid = auth.currentUser?.uid ?: return@launch
             runCatching {
-                // Load my stats
+                // 1. Load my stats
                 val myDoc = firestore.collection("users").document(uid).get().await()
                 val myPoints = (myDoc.getLong("points") ?: 0).toInt()
                 val myStreak = (myDoc.getLong("currentStreak") ?: 0).toInt()
                 val myToday = (myDoc.getLong("todayStudyMinutes") ?: 0).toInt()
+                val myExamType = myDoc.getString("examType") ?: "" // User ka exam (e.g., UPSC)
 
-                // Load saved competitor UIDs
+                // 2. Load saved competitor UIDs
                 val compSnap = firestore.collection("users").document(uid)
                     .collection("competitors").get().await()
-                val compUids = compSnap.documents.map { it.id }
+                var compUids = compSnap.documents.map { it.id }
 
+                // 🌟 LOGIC: Agar koi competitor nahi mila, toh AUTO-MATCH karo!
+                if (compUids.isEmpty() && myExamType.isNotEmpty()) {
+                    compUids = autoMatchCompetitors(uid, myExamType)
+                }
+
+                // 3. Fetch all competitors details (Aapka purana logic)
                 val competitors = compUids.mapNotNull { cUid ->
                     runCatching {
                         val doc = firestore.collection("users").document(cUid).get().await()
                         Competitor(
                             uid = cUid,
                             name = doc.getString("name") ?: "Unknown",
-                            examTarget = doc.getString("examTarget") ?: "",
+                            examTarget = doc.getString("examTarget") ?: doc.getString("examType") ?: "",
                             points = (doc.getLong("points") ?: 0).toInt(),
                             streak = (doc.getLong("currentStreak") ?: 0).toInt(),
                             todayMinutes = (doc.getLong("todayStudyMinutes") ?: 0).toInt(),
@@ -95,6 +103,35 @@ class CompetitorViewModel @Inject constructor(
                 _state.update { it.copy(isLoading = false, error = e.localizedMessage) }
             }
         }
+    }
+
+    // 🌟 NAYA FUNCTION: Jo background me automatic rivals dhoondhega aur save karega
+    private suspend fun autoMatchCompetitors(myUid: String, examType: String): List<String> {
+        return runCatching {
+            // Same exam type ke top 10 users uthao jo khud aap nahi ho
+            val batchSnap = firestore.collection("users")
+                .whereEqualTo("examType", examType)
+                .orderBy("points", com.google.firebase.firestore.Query.Direction.DESCENDING)
+                .limit(10)
+                .get()
+                .await()
+
+            val autoSelectedUids = batchSnap.documents
+                .map { it.id }
+                .filter { it != myUid } // Apne aap ko remove kiya
+                .take(5) // Top 5 rivals select kiye
+
+            // Inhe user ke sub-collection me save kar do taaki agli baar automatic load hon
+            val batch = firestore.batch()
+            autoSelectedUids.forEach { competitorUid ->
+                val ref = firestore.collection("users").document(myUid)
+                    .collection("competitors").document(competitorUid)
+                batch.set(ref, mapOf("addedAt" to System.currentTimeMillis()))
+            }
+            batch.commit().await()
+
+            autoSelectedUids
+        }.getOrElse { emptyList() }
     }
 
     fun searchUser(query: String) {

@@ -96,6 +96,22 @@ interface SessionDao {
     suspend fun deleteUpcoming(uid: String)
     @Query("SELECT * FROM sessions WHERE userUid = :uid AND status = 'ONGOING' ORDER BY actualStartTime DESC LIMIT 1")
     suspend fun getOngoing(uid: String): SessionEntity?
+
+    // Conflict check — koi session hai is time range mein?
+    @Query("""SELECT * FROM sessions WHERE userUid = :uid 
+        AND scheduledDate = :date 
+        AND status IN ('UPCOMING','ONGOING')
+        AND scheduledStartTime < :endTime 
+        AND scheduledEndTime > :startTime""")
+    suspend fun getConflicting(uid: String, date: Long, startTime: Long, endTime: Long): List<SessionEntity>
+
+    // Available slots us din ke — rat 12 baje se pahle
+    @Query("""SELECT * FROM sessions WHERE userUid = :uid 
+        AND scheduledDate = :date 
+        AND status IN ('UPCOMING','ONGOING')
+        ORDER BY scheduledStartTime""")
+    suspend fun getForDay(uid: String, date: Long): List<SessionEntity>
+
 }
 
 @Dao

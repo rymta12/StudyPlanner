@@ -86,4 +86,8 @@ dependencies {
     implementation(libs.google.identity)
     implementation(libs.credential.manager)
     implementation(libs.credential.manager.play)
+
+    implementation(libs.androidx.media3.exoplayer)
+    implementation(libs.androidx.media3.ui)
+    implementation(libs.androidx.media3.session)
 }

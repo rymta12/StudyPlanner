@@ -8,6 +8,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavController
 import com.studyplanner.app.core.navigation.Route
@@ -36,6 +37,17 @@ fun HomeScreen(navController: NavController) {
     var selectedTab by remember { mutableIntStateOf(0) }
 
     Scaffold(
+        floatingActionButton = {
+            if (selectedTab == 0 || selectedTab == 1) {
+                androidx.compose.material3.ExtendedFloatingActionButton(
+                    onClick = { navController.navigate(Route.ManualSession.path) },
+                    icon = { Icon(Icons.Default.Add, null) },
+                    text = { Text("Extra Session") },
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = Color.White
+                )
+            }
+        },
         bottomBar = {
             NavigationBar {
                 bottomNavItems.forEachIndexed { index, item ->
@@ -97,16 +109,5 @@ private fun ProgressAnalyticsTab(navController: NavController) {
             )
             1 -> AnalyticsScreen()
         }
-    }
-}
-
-@Composable
-private fun PlaceholderTab(text: String) {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(text, style = MaterialTheme.typography.titleMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant)
     }
 }

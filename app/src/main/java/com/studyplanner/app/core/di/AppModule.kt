@@ -114,6 +114,11 @@ object AppModule {
     )
 
     @Provides @Singleton
+    fun provideStudyMusicManager(@ApplicationContext context: Context) =
+        com.studyplanner.app.core.util.StudyMusicManager(context)
+
+
+    @Provides @Singleton
     fun provideAntiCheatManager(@ApplicationContext context: Context) =
         AntiCheatManager(context)
 

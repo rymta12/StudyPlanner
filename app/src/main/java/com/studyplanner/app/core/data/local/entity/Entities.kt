@@ -159,7 +159,8 @@ data class SessionEntity(
     val pointsEarned: Int,
     val isRescheduled: Boolean,
     val originalDate: Long,
-    val createdAt: Long
+    val createdAt: Long,
+    val isManual: Boolean = false
 )
 
 @Entity(tableName = "personal_routines")

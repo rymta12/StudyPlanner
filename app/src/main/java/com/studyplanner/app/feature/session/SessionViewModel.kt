@@ -42,6 +42,7 @@ data class SessionUiState(
     val pointsEarned: Int = 0,
     val isLoading: Boolean = false,
     val error: String? = null,
+    val celebrationDismissed: Boolean = false,
 )
 
 @HiltViewModel
@@ -53,6 +54,7 @@ class SessionViewModel @Inject constructor(
     private val visionBoardDao: VisionBoardDao,
     private val auth: FirebaseAuth,
     private val antiCheatManager: com.studyplanner.app.core.util.AntiCheatManager,
+    private val musicManager: com.studyplanner.app.core.util.StudyMusicManager,
     @dagger.hilt.android.qualifiers.ApplicationContext private val context: android.content.Context,
 ) : ViewModel() {
 
@@ -60,7 +62,9 @@ class SessionViewModel @Inject constructor(
     private val _state = MutableStateFlow(SessionUiState())
     val state = _state.asStateFlow()
     val antiCheatState = antiCheatManager.state
+    val musicState = musicManager.state
     private var timerJob: Job? = null
+    private var selectedTrackId = "lofi_1"
 
     init {
         loadSession()
@@ -162,6 +166,12 @@ class SessionViewModel @Inject constructor(
             _state.update { it.copy(phase = SessionPhase.VISION_FLASH) }
             delay(3000)
             antiCheatManager.onSessionStart()
+            // Music start — selected track ya custom URL
+            if (s.musicUrl.isNotBlank()) {
+                musicManager.play("custom", s.musicUrl)
+            } else {
+                musicManager.play(selectedTrackId)
+            }
 
             // FocusMonitorService start karo — lock screen notification + app blocking
             val serviceIntent = android.content.Intent(context, com.studyplanner.app.core.service.FocusMonitorService::class.java).apply {
@@ -211,7 +221,7 @@ class SessionViewModel @Inject constructor(
 
     fun markComplete() {
         timerJob?.cancel()
-        // Service stop karo
+        musicManager.stop()
         context.startService(android.content.Intent(context, com.studyplanner.app.core.service.FocusMonitorService::class.java).apply {
             action = com.studyplanner.app.core.service.FocusMonitorService.ACTION_STOP
         })
@@ -222,7 +232,8 @@ class SessionViewModel @Inject constructor(
                     phase = SessionPhase.COMPLETE,
                     pointsEarned = result?.pointsEarned ?: 10,
                     showExtensionDialog = false,
-                    showTimeUpDialog = false
+                    showTimeUpDialog = false,
+                    celebrationDismissed = false
                 )
             }
         }
@@ -253,6 +264,7 @@ class SessionViewModel @Inject constructor(
 
     fun dismissExtensionDialog() = _state.update { it.copy(showExtensionDialog = false) }
     fun dismissTimeUpDialog() = _state.update { it.copy(showTimeUpDialog = false) }
+    fun dismissCelebration() = _state.update { it.copy(celebrationDismissed = true) }
     fun dismissMilestone() = _state.update { it.copy(streakMilestone = null) }
 
     /** Break start — time up dialog se "Complete" dabaane ke baad agar aur sessions hain */
@@ -262,6 +274,7 @@ class SessionViewModel @Inject constructor(
     }
 
     private fun startBreak() {
+        musicManager.pause()   // break pe pause
         val breakMs = _state.value.breakMinutes * 60 * 1000L
         _state.update {
             it.copy(
@@ -278,6 +291,7 @@ class SessionViewModel @Inject constructor(
     }
 
     private fun resumeStudy() {
+        musicManager.resume()  // break ke baad resume
         val studyMs = _state.value.studyMinutes * 60 * 1000L
         _state.update {
             it.copy(
@@ -300,8 +314,12 @@ class SessionViewModel @Inject constructor(
     fun onPromptMissed() = antiCheatManager.onPromptMissed()
     fun checkPrompt() = antiCheatManager.checkShouldShowPrompt()
 
+    fun selectTrack(trackId: String) { selectedTrackId = trackId }
+    fun stopMusic() = musicManager.stop()
+
     override fun onCleared() {
         super.onCleared()
         timerJob?.cancel()
+        musicManager.stop()
     }
 }

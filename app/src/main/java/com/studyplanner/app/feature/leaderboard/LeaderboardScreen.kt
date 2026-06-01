@@ -20,12 +20,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.studyplanner.app.core.util.Badge
 import com.studyplanner.app.ui.components.LoadingScreen
 import com.studyplanner.app.ui.theme.*
@@ -54,7 +56,7 @@ fun LeaderboardScreen(viewModel: LeaderboardViewModel = hiltViewModel(),
         }
 
         when (activeTab) {
-            0 -> LeaderboardTab(state = state, onScopeChange = { viewModel.setScope(it) }, onCompetitor = onCompetitor)
+            0 -> LeaderboardTab(state = state, onScopeChange = { viewModel.setScope(it) }, onCompetitor = onCompetitor, viewModel = viewModel)
             1 -> BadgesTab(badges = state.badges)
         }
     }
@@ -89,6 +91,7 @@ private fun LeaderboardHeader(state: LeaderboardUiState) {
 private fun LeaderboardTab(
     state: LeaderboardUiState,
     onCompetitor: () -> Unit,
+    viewModel: LeaderboardViewModel,
     onScopeChange: (LeaderboardScope) -> Unit
 ) {
     Column(modifier = Modifier.fillMaxSize()) {
@@ -118,17 +121,44 @@ private fun LeaderboardTab(
         }
 
         if (state.error != null) {
+            val context = LocalContext.current
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    modifier = Modifier.padding(24.dp)
+                ) {
                     Text("😕", fontSize = 48.sp)
-                    Text(
-                        "Could not load leaderboard",
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                    Text(
-                        state.error, style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
+                    Text("Could not load leaderboard",
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold)
+                    if (state.indexUrl != null) {
+                        Text("Firestore index banana padega (ek baar)",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            textAlign = TextAlign.Center)
+                        Button(
+                            onClick = {
+                                val intent = android.content.Intent(
+                                    android.content.Intent.ACTION_VIEW,
+                                    android.net.Uri.parse(state.indexUrl)
+                                )
+                                context.startActivity(intent)
+                            },
+                            shape = RoundedCornerShape(12.dp)
+                        ) {
+                            Icon(Icons.Default.OpenInBrowser, null)
+                            Spacer(Modifier.width(8.dp))
+                            Text("Index Banao (Firebase Console)")
+                        }
+                        Text("Button dabao → browser mein 'Create Index' click karo → 2 min wait karo",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            textAlign = TextAlign.Center)
+                    }
+                    TextButton(onClick = { viewModel.refresh() }) {
+                        Text("Retry")
+                    }
                 }
             }
             return

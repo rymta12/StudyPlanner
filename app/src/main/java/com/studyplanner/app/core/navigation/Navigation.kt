@@ -31,6 +31,8 @@ sealed class Route(val path: String) {
     data object WeeklyReview : Route("weekly_review")
     data object NightReflection : Route("night_reflection")
     data object Competitor : Route("competitor")
+    data object ManualSession : Route("manual_session")
+
     data object Profile : Route("profile")
     data object SubjectDetail : Route("subject/{subjectId}") {
         fun go(id: Long) = "subject/$id"
@@ -106,6 +108,12 @@ fun StudyPlannerNavGraph(
         composable(Route.Profile.path) {
             ProfileScreen(
                 onSignOut = { navController.navigate(Route.Launch.path) { popUpTo(0) } }
+            )
+        }
+
+        composable(Route.ManualSession.path) {
+            com.studyplanner.app.feature.manualsession.ManualSessionScreen(
+                onBack = { navController.popBackStack() }
             )
         }
 

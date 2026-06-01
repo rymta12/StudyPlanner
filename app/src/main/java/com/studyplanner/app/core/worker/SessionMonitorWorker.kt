@@ -117,11 +117,11 @@ class SessionMonitorWorker @AssistedInject constructor(
                 val minutesUntil =
                     ((session.scheduledStartTime - now) / 60000).toInt()
 
-                if (minutesUntil in 9..11) {
+                if (minutesUntil in 5..15) {
                     notificationHelper.showSessionReminder(
                         session.id,
                         "Study Session",
-                        10
+                        minutesUntil
                     )
                 }
             }

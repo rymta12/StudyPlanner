@@ -37,6 +37,7 @@ data class LeaderboardUiState(
     val badges: List<Badge> = emptyList(),
     val isLoading: Boolean = true,
     val error: String? = null,
+    val indexUrl: String? = null,
 )
 
 @HiltViewModel
@@ -108,11 +109,19 @@ class LeaderboardViewModel @Inject constructor(
                     )
                 }
             }.onFailure { e ->
-                _state.update { it.copy(isLoading = false, error = e.localizedMessage) }
+                val msg = e.localizedMessage ?: ""
+                val url = if (msg.contains("https://")) {
+                    msg.substringAfter("https://").let { "https://$it" }.trim()
+                } else null
+                _state.update { it.copy(isLoading = false, error = msg, indexUrl = url) }
             }
         }
     }
 
+    fun refresh() {
+        _state.update { it.copy(isLoading = true, error = null, indexUrl = null) }
+        load(_state.value.scope)
+    }
     private fun loadBadges() {
         viewModelScope.launch {
             val uid = auth.currentUser?.uid ?: return@launch
