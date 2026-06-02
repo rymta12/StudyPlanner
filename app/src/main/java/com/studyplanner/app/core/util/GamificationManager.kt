@@ -39,6 +39,7 @@ class GamificationManager @Inject constructor(
     private val userDao: UserDao,
     private val sessionDao: SessionDao,
     private val streakDao: StreakDao,
+    private val notificationHelper: NotificationHelper,
 ) {
     companion object {
         const val POINTS_SESSION_COMPLETE = 10
@@ -154,6 +155,8 @@ class GamificationManager @Inject constructor(
                 .collection("badges").document(badgeId)
                 .set(mapOf("id" to badgeId, "unlockedAt" to System.currentTimeMillis())).await()
         }
+        // Badge unlock hone par notification dikhao
+        notificationHelper.showAchievement(unlockedBadge.emoji, unlockedBadge.title, unlockedBadge.description)
         return unlockedBadge
     }
 

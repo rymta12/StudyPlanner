@@ -1,0 +1,1320 @@
+{
+  "syllabusVersion": "2026",
+  "description": "Comprehensive Master Static Syllabus for UPSC",
+  "subjects": [
+    {
+      "subjectId": "SUB_POLITY",
+      "subjectName": "Indian Polity & Governance",
+      "priority": 1,
+      "chapters": [
+        {
+          "chapterId": "POL_CH_1",
+          "chapterName": "Historical Background & Constitutional Framework",
+          "topics": [
+            {
+              "topicId": "POL_TOPIC_CONST_DEV_TIMELINE",
+              "topicName": "Constitutional Development Timeline",
+              "yieldType": "HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 9,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "Constitutional Development Timeline UPSC",
+              "subtopics": [
+                { "subtopicId": "POL_SUB_COMPANY_RULE", "subtopicName": "Regulating Act 1773, Pitt's India Act 1784, and Charter Acts (1793-1853)", "timeEstimateMinutes": 120 },
+                { "subtopicId": "POL_SUB_CROWN_RULE", "subtopicName": "Government of India Acts 1858, 1919 (Diarchy), 1935 (Provincial Autonomy)", "timeEstimateMinutes": 150 },
+                { "subtopicId": "POL_SUB_COUNCILS_ACTS", "subtopicName": "Indian Councils Acts 1861, 1892, and 1909 (Morley-Minto Reforms)", "timeEstimateMinutes": 90 }
+              ]
+            },
+            {
+              "topicId": "POL_TOPIC_MAKING_FEATURES",
+              "topicName": "Making & Salient Features of the Constitution",
+              "yieldType": "MEDIUM",
+              "difficulty": "EASY",
+              "pyqFrequency": 5,
+              "lastAskedYear": 2024,
+              "revisionCountRequired": 2,
+              "searchQuery": "Making of Indian Constitution UPSC",
+              "subtopics": [
+                { "subtopicId": "POL_SUB_CONSTITUENT_ASSEMBLY", "subtopicName": "Constituent Assembly composition, committees, and criticism", "timeEstimateMinutes": 75 },
+                { "subtopicId": "POL_SUB_SOURCES_BORROWINGS", "subtopicName": "Sources of the Constitution (Borrowed features from world constitutions)", "timeEstimateMinutes": 45 },
+                { "subtopicId": "POL_SUB_SCHEDULES", "subtopicName": "12 Schedules of Indian Constitution and details of structural provisions", "timeEstimateMinutes": 60 }
+              ]
+            },
+            {
+              "topicId": "POL_TOPIC_PREAMBLE",
+              "topicName": "Preamble of the Constitution",
+              "yieldType": "HIGH",
+              "difficulty": "EASY",
+              "pyqFrequency": 8,
+              "lastAskedYear": 2024,
+              "revisionCountRequired": 2,
+              "searchQuery": "Preamble UPSC",
+              "subtopics": [
+                { "subtopicId": "POL_SUB_PREAMBLE_KEYWORDS", "subtopicName": "Sovereign, Socialist, Secular, Democratic, Republic, Justice, Liberty, Equality, Fraternity", "timeEstimateMinutes": 60 },
+                { "subtopicId": "POL_SUB_PREAMBLE_LEGAL_STATUS", "subtopicName": "Legal status and amendability (Berubari vs Kesavananda Bharati case)", "timeEstimateMinutes": 45 }
+              ]
+            }
+          ]
+        },
+        {
+          "chapterId": "POL_CH_2",
+          "chapterName": "Core Identity, Rights & Duties",
+          "topics": [
+            {
+              "topicId": "POL_TOPIC_UT_TERRITORY",
+              "topicName": "Union & Its Territory and Citizenship",
+              "yieldType": "MEDIUM",
+              "difficulty": "MEDIUM",
+              "pyqFrequency": 6,
+              "lastAskedYear": 2024,
+              "revisionCountRequired": 3,
+              "searchQuery": "Union and Citizenship UPSC",
+              "subtopics": [
+                { "subtopicId": "POL_SUB_UNION_TERRITORY", "subtopicName": "Articles 1 to 4, reorganization of states, Dhar/JVP committees & Fazl Ali Commission", "timeEstimateMinutes": 90 },
+                { "subtopicId": "POL_SUB_CITIZENSHIP_CONST", "subtopicName": "Constitutional Provisions (Articles 5-11)", "timeEstimateMinutes": 60 },
+                { "subtopicId": "POL_SUB_CITIZENSHIP_AMEND", "subtopicName": "Citizenship Act 1955, modes of acquisition/loss, and CAA framework", "timeEstimateMinutes": 90 },
+                { "subtopicId": "POL_SUB_OCI_NRI", "subtopicName": "OCI, PIO, and NRI legal differences and rights", "timeEstimateMinutes": 45 }
+              ]
+            },
+            {
+              "topicId": "POL_TOPIC_FR",
+              "topicName": "Fundamental Rights",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 18,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 5,
+              "searchQuery": "Fundamental Rights UPSC",
+              "subtopics": [
+                { "subtopicId": "POL_SUB_FR_EQUALITY", "subtopicName": "Right to Equality (Articles 14-18) with exceptions", "timeEstimateMinutes": 120 },
+                { "subtopicId": "POL_SUB_FR_FREEDOM", "subtopicName": "Right to Freedom (Articles 19-22) and reasonable restrictions", "timeEstimateMinutes": 150 },
+                { "subtopicId": "POL_SUB_FR_EXPLOIT_RELIGION", "subtopicName": "Right against Exploitation & Freedom of Religion (Articles 23-28)", "timeEstimateMinutes": 90 },
+                { "subtopicId": "POL_SUB_FR_CULTURE_REMEDIES", "subtopicName": "Minority Rights (Art 29-30) & Constitutional Remedies Writs (Art 32)", "timeEstimateMinutes": 120 },
+                { "subtopicId": "POL_SUB_FR_AMENDABILITY", "subtopicName": "Basic Structure Doctrine and amendability of Part III", "timeEstimateMinutes": 90 }
+              ]
+            },
+            {
+              "topicId": "POL_TOPIC_D_DIRECTIVES_DUTIES",
+              "topicName": "DPSP & Fundamental Duties",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "MEDIUM",
+              "pyqFrequency": 12,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "DPSP and Fundamental Duties UPSC",
+              "subtopics": [
+                { "subtopicId": "POL_SUB_DPSP_CLASSIFICATION", "subtopicName": "Socialistic, Gandhian, and Liberal-Intellectual Principles (Articles 36-51)", "timeEstimateMinutes": 90 },
+                { "subtopicId": "POL_SUB_FR_VS_DPSP", "subtopicName": "Conflict and balance between Fundamental Rights and DPSP", "timeEstimateMinutes": 60 },
+                { "subtopicId": "POL_SUB_FUNDAMENTAL_DUTIES", "subtopicName": "Article 51A, Swaran Singh Committee, Verma Committee, and enforceability", "timeEstimateMinutes": 60 }
+              ]
+            }
+          ]
+        },
+        {
+          "chapterId": "POL_CH_ADD_FEDERAL_EMERGENCY",
+          "chapterName": "Federal Structure & Emergency Provisions",
+          "topics": [
+            {
+              "topicId": "POL_TOPIC_FEDERALISM_DYNAMICS",
+              "topicName": "Federalism & Centre-State Relations",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 14,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "Centre State Relations Federalism UPSC",
+              "subtopics": [
+                { "subtopicId": "POL_SUB_FED_LEGISLATIVE", "subtopicName": "Legislative Relations (Articles 245-255) & Territorial jurisdiction", "timeEstimateMinutes": 90 },
+                { "subtopicId": "POL_SUB_FED_ADMINISTRATIVE", "subtopicName": "Administrative Relations (Articles 256-263) & All India Services control dynamics", "timeEstimateMinutes": 75 },
+                { "subtopicId": "POL_SUB_FED_FINANCIAL", "subtopicName": "Financial Relations (Articles 268-293), Finance Commission framework & GST impact", "timeEstimateMinutes": 120 }
+              ]
+            },
+            {
+              "topicId": "POL_TOPIC_EMERGENCY_PROVISIONS",
+              "topicName": "Emergency Provisions",
+              "yieldType": "HIGH",
+              "difficulty": "MEDIUM",
+              "pyqFrequency": 11,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "Emergency Provisions Article 352 356 360 UPSC",
+              "subtopics": [
+                { "subtopicId": "POL_SUB_EMG_NATIONAL", "subtopicName": "National Emergency (Article 352): Grounds, approval, revocation & impact on FR (Art 358 vs 359)", "timeEstimateMinutes": 100 },
+                { "subtopicId": "POL_SUB_EMG_PRESIDENT_RULE", "subtopicName": "President's Rule (Article 356) & Financial Emergency (Article 360): Scope, judicial review & Bommai Case parameters", "timeEstimateMinutes": 110 }
+              ]
+            }
+          ]
+        },
+        {
+          "chapterId": "POL_CH_3",
+          "chapterName": "Central & State Government Structure",
+          "topics": [
+            {
+              "topicId": "POL_TOPIC_UNION_EXEC",
+              "topicName": "Union Executive",
+              "yieldType": "HIGH",
+              "difficulty": "MEDIUM",
+              "pyqFrequency": 10,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "Union Executive President Prime Minister UPSC",
+              "subtopics": [
+                { "subtopicId": "POL_SUB_PRESIDENT_VP", "subtopicName": "President & Vice-President: Election, impeachment, powers (Pardoning & Ordinance making)", "timeEstimateMinutes": 120 },
+                { "subtopicId": "POL_SUB_PM_COM", "subtopicName": "Prime Minister, Council of Ministers, and Cabinet Committees", "timeEstimateMinutes": 90 },
+                { "subtopicId": "POL_SUB_ATTORNEY_GENERAL", "subtopicName": "Attorney General of India: Appointment, eligibility, and limitations", "timeEstimateMinutes": 45 }
+              ]
+            },
+            {
+              "topicId": "POL_TOPIC_PARLIAMENT",
+              "topicName": "Parliament of India",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 22,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 5,
+              "searchQuery": "Parliament UPSC Polity",
+              "subtopics": [
+                { "subtopicId": "POL_SUB_PARL_HOUSES", "subtopicName": "Lok Sabha & Rajya Sabha: Composition, duration, and officers", "timeEstimateMinutes": 90 },
+                { "subtopicId": "POL_SUB_LEGISLATIVE_PROCEDURE", "subtopicName": "Sessions, Motions, Legislative Procedures (Ordinary, Money, Financial & Constitutional Bills)", "timeEstimateMinutes": 180 },
+                { "subtopicId": "POL_SUB_PARL_COMMITTEES", "subtopicName": "Parliamentary Committees (PAC, Estimate Committee, COPU) and privileges", "timeEstimateMinutes": 120 },
+                { "subtopicId": "POL_SUB_PARL_FUNDS", "subtopicName": "Consolidated, Contingency Funds and Public Account of India", "timeEstimateMinutes": 60 }
+              ]
+            },
+            {
+              "topicId": "POL_TOPIC_STATE_GOVT",
+              "topicName": "State Executive & Legislature",
+              "yieldType": "HIGH",
+              "difficulty": "MEDIUM",
+              "pyqFrequency": 8,
+              "lastAskedYear": 2024,
+              "revisionCountRequired": 4,
+              "searchQuery": "State Legislature and Governor UPSC",
+              "subtopics": [
+                { "subtopicId": "POL_SUB_GOVERNOR_POWERS", "subtopicName": "Governor: Appointment, constitutional/discretionary powers, and friction points", "timeEstimateMinutes": 120 },
+                { "subtopicId": "POL_SUB_STATE_LEGISLATURE", "subtopicName": "Legislative Assembly and Council: Creation, abolition, and functional differences", "timeEstimateMinutes": 100 }
+              ]
+            }
+          ]
+        },
+        {
+          "chapterId": "POL_CH_4",
+          "chapterName": "Judiciary & Local Governance",
+          "topics": [
+            {
+              "topicId": "POL_TOPIC_JUDICIARY",
+              "topicName": "Supreme Court, High Court & Subordinate Courts",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 15,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 5,
+              "searchQuery": "Indian Judiciary Supreme Court High Court UPSC",
+              "subtopics": [
+                { "subtopicId": "POL_SUB_SUPREME_COURT", "subtopicName": "Supreme Court: Appointment (Collegium system), Jurisdiction (Original, Appellate, Advisory, Writ)", "timeEstimateMinutes": 150 },
+                { "subtopicId": "POL_SUB_HIGH_COURT", "subtopicName": "High Courts: Power comparison with SC, writ jurisdiction under Art 226", "timeEstimateMinutes": 90 },
+                { "subtopicId": "POL_SUB_JUDICIAL_ACTIVISM", "subtopicName": "Judicial Review, Judicial Activism, and Public Interest Litigation (PIL)", "timeEstimateMinutes": 75 }
+              ]
+            },
+            {
+              "topicId": "POL_TOPIC_LOCAL_GOVT",
+              "topicName": "Local Government (Panchayats & Municipalities)",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "MEDIUM",
+              "pyqFrequency": 14,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "Panchayati Raj and Municipalities 73rd 74th Amendment UPSC",
+              "subtopics": [
+                { "subtopicId": "POL_SUB_PRI_73RD", "subtopicName": "73rd Amendment Act: Compulsory and voluntary provisions, 11th Schedule", "timeEstimateMinutes": 120 },
+                { "subtopicId": "POL_SUB_ULB_74TH", "subtopicName": "74th Amendment Act: Types of urban local bodies, State Finance/Election Commissions", "timeEstimateMinutes": 100 }
+              ]
+            }
+          ]
+        },
+        {
+          "chapterId": "POL_CH_5",
+          "chapterName": "Special Provisions, Tribunals & Bodies",
+          "topics": [
+            {
+              "topicId": "POL_TOPIC_SPECIAL_PROVISIONS_STATES",
+              "topicName": "Special Constitutional Provisions & Scheduled Areas",
+              "yieldType": "HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 7,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "5th 6th Schedule Scheduled Areas UPSC",
+              "subtopics": [
+                { "subtopicId": "POL_SUB_SCHEDULED_5TH_6TH", "subtopicName": "5th and 6th Schedules structural administration setup", "timeEstimateMinutes": 90 },
+                { "subtopicId": "POL_SUB_ART_371_STATES", "subtopicName": "Special Provisions for States (Articles 371 to 371-J) overview mapping", "timeEstimateMinutes": 75 }
+              ]
+            },
+            {
+              "topicId": "POL_TOPIC_TRIBUNALS_COOPERATIVES",
+              "topicName": "Tribunals & Cooperative Societies",
+              "yieldType": "HIGH",
+              "difficulty": "MEDIUM",
+              "pyqFrequency": 5,
+              "lastAskedYear": 2024,
+              "revisionCountRequired": 3,
+              "searchQuery": "Tribunals and Cooperative Societies UPSC",
+              "subtopics": [
+                { "subtopicId": "POL_SUB_TRIBUNALS_ADMIN", "subtopicName": "Part XIV-A: Articles 323A (Administrative) and 323B (Other matters) comparison", "timeEstimateMinutes": 75 },
+                { "subtopicId": "POL_SUB_COOP_SOCIETIES", "subtopicName": "Part IX-B, 97th Constitutional Amendment, and Multi-State Cooperative structures", "timeEstimateMinutes": 75 }
+              ]
+            },
+            {
+              "topicId": "POL_TOPIC_OFFICIAL_LANG_PROV",
+              "topicName": "Official Language",
+              "yieldType": "LOW",
+              "difficulty": "EASY",
+              "pyqFrequency": 2,
+              "lastAskedYear": 2022,
+              "revisionCountRequired": 2,
+              "searchQuery": "Official Language Provisions Eighth Schedule UPSC",
+              "subtopics": [
+                { "subtopicId": "POL_SUB_LANG_CONSTITUTIONAL", "subtopicName": "Part XVII constitutional machinery (Art 343-351) and languages of courts", "timeEstimateMinutes": 60 },
+                { "subtopicId": "POL_SUB_CLASSICAL_CRITERIA", "subtopicName": "Criteria and institutional benefits for Classical Languages declaration", "timeEstimateMinutes": 35 }
+              ]
+            },
+            {
+              "topicId": "POL_TOPIC_CONST_NON_CONST_BODIES",
+              "topicName": "Constitutional & Non-Constitutional Bodies",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "MEDIUM",
+              "pyqFrequency": 13,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "Constitutional and Non Constitutional Bodies UPSC",
+              "subtopics": [
+                { "subtopicId": "POL_SUB_CONST_BODIES", "subtopicName": "ECI, UPSC, CAG, Finance Commission, National Commissions for SC/ST/OBC", "timeEstimateMinutes": 150 },
+                { "subtopicId": "POL_SUB_NON_CONST_BODIES", "subtopicName": "NITI Aayog, NHRC, CIC, CVC, CBI, Lokpal and Lokayuktas", "timeEstimateMinutes": 120 },
+                { "subtopicId": "POL_SUB_GST_COUNCIL", "subtopicName": "GST Council (Art 279A) composition, voting weights, and structural dynamics", "timeEstimateMinutes": 60 }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "subjectId": "SUB_ECONOMY",
+      "subjectName": "Indian Economy",
+      "priority": 2,
+      "chapters": [
+        {
+          "chapterId": "ECO_CH_1",
+          "chapterName": "National Income, Growth & Inflation",
+          "topics": [
+            {
+              "topicId": "ECO_TOPIC_NATIONAL_INCOME",
+              "topicName": "National Income Accounting",
+              "yieldType": "HIGH",
+              "difficulty": "MEDIUM",
+              "pyqFrequency": 8,
+              "lastAskedYear": 2024,
+              "revisionCountRequired": 3,
+              "searchQuery": "National Income Accounting GDP GVA UPSC",
+              "subtopics": [
+                { "subtopicId": "ECO_SUB_GDP_GNP", "subtopicName": "Concepts of GDP, NDP, GNP, NNP at Factor Cost and Market Price", "timeEstimateMinutes": 90 },
+                { "subtopicId": "ECO_SUB_GVA_REAL_NOMINAL", "subtopicName": "Gross Value Added (GVA), Real vs Nominal GDP, and GDP Deflator", "timeEstimateMinutes": 75 }
+              ]
+            },
+            {
+              "topicId": "ECO_TOPIC_INFLATION",
+              "topicName": "Inflation",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 16,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 5,
+              "searchQuery": "Inflation WPI CPI Monetary Measures UPSC",
+              "subtopics": [
+                { "subtopicId": "ECO_SUB_INFLATION_TYPES", "subtopicName": "Demand-Pull, Cost-Push, Structural Inflation, Headline vs Core Inflation", "timeEstimateMinutes": 90 },
+                { "subtopicId": "ECO_SUB_WPI_CPI", "subtopicName": "Indices: Wholesale Price Index (WPI) vs Consumer Price Index (CPI) item weights & base years", "timeEstimateMinutes": 90 },
+                { "subtopicId": "ECO_SUB_INFLATION_EFFECTS", "subtopicName": "Impact of inflation on debtors, creditors, currency value, and economic growth", "timeEstimateMinutes": 75 }
+              ]
+            }
+          ]
+        },
+        {
+          "chapterId": "ECO_CH_2",
+          "chapterName": "Banking, Monetary Policy & Financial Markets",
+          "topics": [
+            {
+              "topicId": "ECO_TOPIC_MONETARY_POLICY",
+              "topicName": "Monetary Policy & RBI Machinery",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 19,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 5,
+              "searchQuery": "Monetary Policy RBI Tools MPC UPSC",
+              "subtopics": [
+                { "subtopicId": "ECO_SUB_MPC_STRUCTURE", "subtopicName": "Monetary Policy Committee (MPC) structure, inflation targeting framework", "timeEstimateMinutes": 60 },
+                { "subtopicId": "ECO_SUB_QUANTITATIVE_TOOLS", "subtopicName": "CRR, SLR, Repo, Reverse Repo, MSF, Bank Rate, and Open Market Operations (OMO)", "timeEstimateMinutes": 120 },
+                { "subtopicId": "ECO_SUB_QUALITATIVE_TOOLS", "subtopicName": "Margin requirements, moral suasion, selective credit control", "timeEstimateMinutes": 45 },
+                { "subtopicId": "ECO_SUB_MONEY_SUPPLY", "subtopicName": "Monetary Aggregates (M0, M1, M2, M3, M4) and Money Multiplier velocity concept", "timeEstimateMinutes": 90 }
+              ]
+            },
+            {
+              "topicId": "ECO_TOPIC_BANKING_SYSTEM",
+              "topicName": "Banking Sector & Non-Performing Assets",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 14,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "Banking Sector NPA Basel Norms UPSC",
+              "subtopics": [
+                { "subtopicId": "ECO_SUB_NPA_RESOLUTIONS", "subtopicName": "NPAs, IBC 2016, NARCL (Bad Bank), Prompt Corrective Action (PCA) framework", "timeEstimateMinutes": 100 },
+                { "subtopicId": "ECO_SUB_BASEL_NORMS", "subtopicName": "Basel I, II, and III Accords: CAR/CRAR, Capital Conservation Buffer", "timeEstimateMinutes": 90 },
+                { "subtopicId": "ECO_SUB_DIGITAL_BANKING", "subtopicName": "CBDC (e-Rupee), UPI architecture, Neo-banks, and financial inclusion parameters", "timeEstimateMinutes": 75 }
+              ]
+            },
+            {
+              "topicId": "ECO_TOPIC_FINANCIAL_MARKETS",
+              "topicName": "Financial & Capital Markets",
+              "yieldType": "HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 11,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "Money Market Capital Market Instruments UPSC",
+              "subtopics": [
+                { "subtopicId": "ECO_SUB_MONEY_MARKET", "subtopicName": "Call Money, Treasury Bills, Commercial Paper, Certificate of Deposits", "timeEstimateMinutes": 90 },
+                { "subtopicId": "ECO_SUB_CAPITAL_MARKET", "subtopicName": "Equity shares, bonds, debentures, derivatives, G-Secs, and SEBI regulatory actions", "timeEstimateMinutes": 100 }
+              ]
+            }
+          ]
+        },
+        {
+          "chapterId": "ECO_CH_3",
+          "chapterName": "Public Finance & Fiscal Policy",
+          "topics": [
+            {
+              "topicId": "ECO_TOPIC_BUDGETING",
+              "topicName": "Government Budgeting & Deficits",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 15,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 5,
+              "searchQuery": "Government Budget Revenue Capital Accounts Deficits UPSC",
+              "subtopics": [
+                { "subtopicId": "ECO_SUB_BUDGET_STRUCTURE", "subtopicName": "Revenue Account vs Capital Account (Receipts and Expenditure mapping)", "timeEstimateMinutes": 120 },
+                { "subtopicId": "ECO_SUB_DEFICIT_CONCEPTS", "subtopicName": "Fiscal Deficit, Revenue Deficit, Effective Revenue Deficit, Primary Deficit mechanics", "timeEstimateMinutes": 90 },
+                { "subtopicId": "ECO_SUB_FRBM_ACT", "subtopicName": "FRBM Act 2003 clauses, NK Singh Committee recommendations, debt-to-GDP targets", "timeEstimateMinutes": 75 }
+              ]
+            },
+            {
+              "topicId": "ECO_TOPIC_TAXATION",
+              "topicName": "Taxation Structure in India",
+              "yieldType": "HIGH",
+              "difficulty": "MEDIUM",
+              "pyqFrequency": 10,
+              "lastAskedYear": 2024,
+              "revisionCountRequired": 4,
+              "searchQuery": "Direct Indirect Taxes GST Laffer Curve UPSC",
+              "subtopics": [
+                { "subtopicId": "ECO_SUB_DIRECT_TAX", "subtopicName": "Income Tax, Corporate Tax, Minimum Alternate Tax (MAT), Capital Gains Tax", "timeEstimateMinutes": 90 },
+                { "subtopicId": "ECO_SUB_INDIRECT_TAX_GST", "subtopicName": "GST structure, cascading effect removal, tax buoyancy vs elasticity, Laffer Curve", "timeEstimateMinutes": 100 }
+              ]
+            }
+          ]
+        },
+        {
+          "chapterId": "ECO_CH_ADD_AGRI_ECONOMY",
+          "chapterName": "Agriculture Economy & Food Security",
+          "topics": [
+            {
+              "topicId": "ECO_TOPIC_AGRI_INPUTS_SUBSIDIES",
+              "topicName": "Agricultural Inputs, Subsidies & MSP",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 18,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 5,
+              "searchQuery": "Agricultural Subsidies Direct Indirect MSP WTO UPSC",
+              "subtopics": [
+                { "subtopicId": "ECO_SUB_AGRI_SUBSIDY", "subtopicName": "Direct and Indirect Subsidies, Power, Fertilizer (Nutrient Based Subsidies) & Water dynamics", "timeEstimateMinutes": 100 },
+                { "subtopicId": "ECO_SUB_MSP_MACHINERY", "subtopicName": "Minimum Support Price mechanism (A2+FL vs C2 costs determination), CACP recommendations & Fair Remunerative Price (FRP)", "timeEstimateMinutes": 90 },
+                { "subtopicId": "ECO_SUB_WTO_AGRI_BOXES", "subtopicName": "WTO Agreement on Agriculture (AoA): Domestic Support amber box, blue box, green box & Peace Clause rules", "timeEstimateMinutes": 90 }
+              ]
+            },
+            {
+              "topicId": "ECO_TOPIC_PDS_FOOD_PROCESSING",
+              "topicName": "PDS Supply Chain & Food Processing Industry",
+              "yieldType": "HIGH",
+              "difficulty": "MEDIUM",
+              "pyqFrequency": 12,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "Public Distribution System Food Processing Sector UPSC",
+              "subtopics": [
+                { "subtopicId": "ECO_SUB_PDS_REFORMS", "subtopicName": "Public Distribution System (PDS): Objectives, limitations, buffer stocks, FCI operations & Shanta Kumar Committee reforms", "timeEstimateMinutes": 110 },
+                { "subtopicId": "ECO_SUB_FOOD_PROCESSING", "subtopicName": "Food Processing Industry in India: Scope, upstream-downstream requirements, supply chain management & PM-KISHAN SAMPADA Yojana", "timeEstimateMinutes": 120 }
+              ]
+            },
+            {
+              "topicId": "ECO_TOPIC_AGRI_INSTITUTIONS_MARKETS",
+              "topicName": "Agricultural Institutions, e-NAM & FPOs",
+              "yieldType": "HIGH",
+              "difficulty": "MEDIUM",
+              "pyqFrequency": 11,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "eNAM FPO Agricultural Institutions UPSC",
+              "subtopics": [
+                { "subtopicId": "ECO_SUB_ENAM", "subtopicName": "e-NAM (Electronic National Agriculture Market) pan-India trading portal, APMC integration, and marketing efficiency", "timeEstimateMinutes": 75 },
+                { "subtopicId": "ECO_SUB_FPO", "subtopicName": "Farmer Producer Organizations (FPOs): Structural layout, cluster-based approach, and bargaining power leverage", "timeEstimateMinutes": 80 },
+                { "subtopicId": "ECO_SUB_AGRI_INSTITUTIONS", "subtopicName": "Institutional architecture supporting Indian Agriculture (NABARD, SFAC, NAFED machinery)", "timeEstimateMinutes": 75 }
+              ]
+            }
+          ]
+        },
+        {
+          "chapterId": "ECO_CH_4",
+          "chapterName": "External Sector & International Trade",
+          "topics": [
+            {
+              "topicId": "ECO_TOPIC_BOP",
+              "topicName": "Balance of Payments & Forex",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 14,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "Balance of Payments Current Capital Account Forex UPSC",
+              "subtopics": [
+                { "subtopicId": "ECO_SUB_BOP_STRUCTURE", "subtopicName": "Current Account (Trade vs Invisibles) and Capital Account (FDI, FPI, External Commercial Borrowings)", "timeEstimateMinutes": 120 },
+                { "subtopicId": "ECO_SUB_EXCHANGE_RATE", "subtopicName": "NEER, REER, currency appreciation/depreciation vs devaluation/revaluation machinery", "timeEstimateMinutes": 90 },
+                { "subtopicId": "ECO_SUB_FOREX_RESERVES", "subtopicName": "Components of Foreign Exchange Reserves: Gold, SDRs, Foreign Currency Assets, RTP with IMF", "timeEstimateMinutes": 60 }
+              ]
+            },
+            {
+              "topicId": "ECO_TOPIC_INT_ORGANISATIONS",
+              "topicName": "International Economic Institutions",
+              "yieldType": "HIGH",
+              "difficulty": "MEDIUM",
+              "pyqFrequency": 9,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 3,
+              "searchQuery": "WTO IMF World Bank Agreements UPSC",
+              "subtopics": [
+                { "subtopicId": "ECO_SUB_WTO_BOXES", "subtopicName": "WTO agreements, Amber, Blue, Green boxes, TRIPS, TRIMS, and Ministerial Conferences outcomes", "timeEstimateMinutes": 100 },
+                { "subtopicId": "ECO_SUB_IMF_WORLD_BANK", "subtopicName": "IMF quota system, World Bank structural arms (IBRD, IDA, IFC, MIGA, ICSID)", "timeEstimateMinutes": 90 }
+              ]
+            }
+          ]
+        },
+        {
+          "chapterId": "ECO_CH_5",
+          "chapterName": "Financial Inclusion & Specialized Banking",
+          "topics": [
+            {
+              "topicId": "ECO_TOPIC_FIN_INCLUSION_LITERACY",
+              "topicName": "Financial Inclusion, Literacy & Grassroots Movements",
+              "yieldType": "HIGH",
+              "difficulty": "MEDIUM",
+              "pyqFrequency": 13,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "Financial Inclusion SHG Movement Priority Sector Lending UPSC",
+              "subtopics": [
+                { "subtopicId": "ECO_SUB_FIN_INCLUSION", "subtopicName": "Financial Inclusion framework, PMJDY metrics, and access indicators", "timeEstimateMinutes": 75 },
+                { "subtopicId": "ECO_SUB_SHG_MICROFINANCE", "subtopicName": "Self-Help Group (SHG) Bank Linkage Programme, NABARD support, and Microfinance institutional parameters", "timeEstimateMinutes": 90 },
+                { "subtopicId": "ECO_SUB_PSL", "subtopicName": "Priority Sector Lending (PSL) targets, sub-targets for weaker sections, and PSLCs (Certificates) mechanism", "timeEstimateMinutes": 80 },
+                { "subtopicId": "ECO_SUB_FIN_LITERACY", "subtopicName": "Financial Literacy strategies, RBI initiatives, and digital payment safety models", "timeEstimateMinutes": 60 }
+              ]
+            },
+            {
+              "topicId": "ECO_TOPIC_DIFFERENTIATED_BANKS",
+              "topicName": "Differentiated Banking Models",
+              "yieldType": "HIGH",
+              "difficulty": "MEDIUM",
+              "pyqFrequency": 10,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 3,
+              "searchQuery": "Payment Banks Small Finance Banks RBI Regulations UPSC",
+              "subtopics": [
+                { "subtopicId": "ECO_SUB_PAYMENT_BANKS", "subtopicName": "Payment Banks: RBI licensing guidelines, scope of activities (deposit limits, no lending), and remittance mechanisms", "timeEstimateMinutes": 70 },
+                { "subtopicId": "ECO_SUB_SMALL_FIN_BANKS", "subtopicName": "Small Finance Banks (SFBs): Capital requirements, target segments, and PSL compliance enforcement", "timeEstimateMinutes": 75 }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "subjectId": "SUB_HISTORY",
+      "subjectName": "History & Culture",
+      "priority": 3,
+      "chapters": [
+        {
+          "chapterId": "HIST_CH_1",
+          "chapterName": "Ancient Indian History & Culture",
+          "topics": [
+            {
+              "topicId": "HIST_TOPIC_HARAPPAN_CIV",
+              "topicName": "Harappan Site Mapping & Culture",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "MEDIUM",
+              "pyqFrequency": 11,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "Indus Valley Civilisation Sites Findings UPSC",
+              "subtopics": [
+                { "subtopicId": "HIST_SUB_IVC_GEOGRAPHY", "subtopicName": "Geographical extent, core site mapping (Dholavira, Rakhigarhi, Lothal, Kalibangan, Banawali)", "timeEstimateMinutes": 120 },
+                { "subtopicId": "HIST_SUB_IVC_SOCIETY_TRADE", "subtopicName": "Town planning, drainage engineering, trade links with Mesopotamia, craft technology", "timeEstimateMinutes": 90 }
+              ]
+            },
+            {
+              "topicId": "HIST_TOPIC_VEDIC_MAHAJANAPADAS",
+              "topicName": "Vedic Period & Mahajanapadas Era",
+              "yieldType": "MEDIUM",
+              "difficulty": "MEDIUM",
+              "pyqFrequency": 5,
+              "lastAskedYear": 2024,
+              "revisionCountRequired": 3,
+              "searchQuery": "Vedic Period Mahajanapadas Buddhism Jainism UPSC",
+              "subtopics": [
+                { "subtopicId": "HIST_SUB_VEDIC_LIT", "subtopicName": "Rig Vedic vs Later Vedic society, political organization, philosophy of Upanishads", "timeEstimateMinutes": 90 },
+                { "subtopicId": "HIST_SUB_HETERODOX_SECTS", "subtopicName": "Buddhism & Jainism: Core philosophies, councils, literature, sects (Hinayana, Mahayana, Vajrayana, Digambara, Shvetambara)", "timeEstimateMinutes": 150 },
+                { "subtopicId": "HIST_SUB_MAHAJANAPADAS_MAP", "subtopicName": "16 Mahajanapadas location mapping, rise of Magadha hegemony", "timeEstimateMinutes": 60 }
+              ]
+            },
+            {
+              "topicId": "HIST_TOPIC_MAURYAN_POST_MAURYAN",
+              "topicName": "Mauryan & Post-Mauryan Empire",
+              "yieldType": "HIGH",
+              "difficulty": "MEDIUM",
+              "pyqFrequency": 8,
+              "lastAskedYear": 2024,
+              "revisionCountRequired": 4,
+              "searchQuery": "Mauryan Empire Ashoka Edicts Post Mauryan Coins UPSC",
+              "subtopics": [
+                { "subtopicId": "HIST_SUB_ASHOKAN_EDICTS", "subtopicName": "Mauryan administration, Ashokan Major Rock Edicts, Pillar Edicts mapping, script usage", "timeEstimateMinutes": 100 },
+                { "subtopicId": "HIST_SUB_POST_MAURYAN", "subtopicName": "Shungas, Kanvas, Indo-Greeks, Kushanas: Coins, Gandhara/Mathura art schools", "timeEstimateMinutes": 90 },
+                { "subtopicId": "HIST_SUB_SATAVAHANAS", "subtopicName": "Satavahana administration, land grants origin, rock-cut architecture of western Deccan", "timeEstimateMinutes": 75 }
+              ]
+            },
+            {
+              "topicId": "HIST_TOPIC_GUPTA_HARSHA",
+              "topicName": "Gupta Era & Harshavardhana",
+              "yieldType": "HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 8,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "Gupta Literature Administration Harsha UPSC",
+              "subtopics": [
+                { "subtopicId": "HIST_SUB_GUPTA_ADMIN_LAND", "subtopicName": "Gupta administrative setup, land revenue terms, feudal agrarian structure development", "timeEstimateMinutes": 90 },
+                { "subtopicId": "HIST_SUB_GUPTA_LITERATURE_PROV", "subtopicName": "Secular and scientific literature: Kalidasa, Vishakhadatta, Aryabhata, Varahamihira works", "timeEstimateMinutes": 100 },
+                { "subtopicId": "HIST_SUB_HARSHAVARDHANA", "subtopicName": "Pushyabhuti dynasty, Kannauj assembly, accounts of Hiuen Tsang/Xuanzang", "timeEstimateMinutes": 60 }
+              ]
+            }
+          ]
+        },
+        {
+          "chapterId": "HIST_CH_ADD_ART_CULTURE_EXPANDED",
+          "chapterName": "Expanded Indian Art, Architecture & Performing Arts",
+          "topics": [
+            {
+              "topicId": "HIST_TOPIC_INDIAN_ARCHITECTURE",
+              "topicName": "Rock-Cut, Temple & Indo-Islamic Architecture",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 14,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 5,
+              "searchQuery": "Temple Architecture Nagara Dravida Indo Islamic UPSC",
+              "subtopics": [
+                { "subtopicId": "HIST_SUB_NAGARA_STYLE", "subtopicName": "Nagara style features: Garbhagriha, Shikhara, regional schools (Odisha, Khajuraho, Solanki)", "timeEstimateMinutes": 100 },
+                { "subtopicId": "HIST_SUB_DRAVIDA_VESARA", "subtopicName": "Dravida architecture (Vimana, Gopurams) & Vesara transitional style features (Chalukyas, Hoysalas)", "timeEstimateMinutes": 100 },
+                { "subtopicId": "HIST_SUB_INDO_ISLAMIC_ARCH", "subtopicName": "Delhi Sultanate & Mughal Architecture: Arcuate style, Pietra Dura, Minarets, Double Domes", "timeEstimateMinutes": 110 }
+              ]
+            },
+            {
+              "topicId": "HIST_TOPIC_PERFORMING_ARTS",
+              "topicName": "Classical Dances & Music Traditions",
+              "yieldType": "HIGH",
+              "difficulty": "MEDIUM",
+              "pyqFrequency": 11,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "Classical Indian Dances Hindustani Carnatic Music UPSC",
+              "subtopics": [
+                { "subtopicId": "HIST_SUB_CLASSICAL_DANCES", "subtopicName": "Core stylistic differences and origins of the 8 Classical Dances", "timeEstimateMinutes": 60 },
+                { "subtopicId": "HIST_SUB_INDIAN_MUSIC", "subtopicName": "Hindustani vs Carnatic Classical Music systems, Gharanas, Ragas, and Musical Instruments mapping", "timeEstimateMinutes": 120 }
+              ]
+            },
+            {
+              "topicId": "HIST_TOPIC_PAINTINGS_LITERATURE",
+              "topicName": "Indian Paintings, Philosophy & Literature",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 13,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "Mural Miniature Paintings Six Schools Indian Philosophy UPSC",
+              "subtopics": [
+                { "subtopicId": "HIST_SUB_PAINTINGS", "subtopicName": "Mural Paintings (Ajanta, Ellora, Sittanavasal) & Miniature Painting Schools (Mughal, Rajasthani, Pahari, Deccani)", "timeEstimateMinutes": 110 },
+                { "subtopicId": "HIST_SUB_PHILOSOPHY", "subtopicName": "Six Schools of Indian Philosophy (Shad-Darshana: Nyaya, Vaisheshika, Samkhya, Yoga, Mimamsa, Vedanta) & Lokayata heterodoxy", "timeEstimateMinutes": 100 }
+              ]
+            },
+            {
+              "topicId": "HIST_TOPIC_BUDDHIST_JAIN_CAVE_ARCH",
+              "topicName": "Buddhist, Jain & Cave Architecture",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 16,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 5,
+              "searchQuery": "Stupas Chaitya Vihara Cave Architecture Ajanta Ellora UPSC",
+              "subtopics": [
+                { "subtopicId": "HIST_SUB_STUPAS", "subtopicName": "Stupa structural layout (Anda, Harmika, Chhatri, Torana Architecture), evolution from Vedic tumuli to Sanchi, Amravati, and Bharhut", "timeEstimateMinutes": 100 },
+                { "subtopicId": "HIST_SUB_CHAITYA_VIHARA", "subtopicName": "Functional and architectural differences between Chaityas (prayer halls) and Viharas (monasteries)", "timeEstimateMinutes": 75 },
+                { "subtopicId": "HIST_SUB_CAVE_ARCH", "subtopicName": "Rock-cut structural architecture evolution: Ajanta (mural integration), Ellora (monolithic structures), Karla, Bhaja, and Udayagiri-Khandagiri Jain caves", "timeEstimateMinutes": 120 }
+              ]
+            },
+            {
+              "topicId": "HIST_TOPIC_HERITAGE_TAGS",
+              "topicName": "UNESCO Frameworks & GI Tags",
+              "yieldType": "HIGH",
+              "difficulty": "MEDIUM",
+              "pyqFrequency": 12,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "UNESCO World Heritage Sites Intangible Cultural Heritage GI Tags UPSC",
+              "subtopics": [
+                { "subtopicId": "HIST_SUB_UNESCO_WHS", "subtopicName": "UNESCO World Heritage Sites criteria (Cultural parameters in India) and latest inclusions mapping", "timeEstimateMinutes": 80 },
+                { "subtopicId": "HIST_SUB_INTANGIBLE_HERITAGE", "subtopicName": "UNESCO's Representative List of the Intangible Cultural Heritage of Humanity (Indian items analysis)", "timeEstimateMinutes": 75 },
+                { "subtopicId": "HIST_SUB_GI_TAGS", "subtopicName": "Geographical Indications (GI) statutory framework, registration criteria, and prominent handicraft/agricultural entries", "timeEstimateMinutes": 90 }
+              ]
+            }
+          ]
+        },
+        {
+          "chapterId": "HIST_CH_2",
+          "chapterName": "South Indian History",
+          "topics": [
+            {
+              "topicId": "HIST_TOPIC_SOUTH_DYNASTIES",
+              "topicName": "Sangam Age & Early South Indian Kingdoms",
+              "yieldType": "HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 7,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "Sangam Age Pallavas Cholas Administration UPSC",
+              "subtopics": [
+                { "subtopicId": "HIST_SUB_SANGAM_LIT", "subtopicName": "Sangam Assemblies, Tolkappiyam, Ettutogai, Pattupattu, epics (Silappadikaram, Manimekalai)", "timeEstimateMinutes": 90 },
+                { "subtopicId": "HIST_SUB_PALLAVA_ART", "subtopicName": "Pallava rock-cut caves, Monolithic Rathas of Mahabalipuram, structural temples evolution", "timeEstimateMinutes": 90 },
+                { "subtopicId": "HIST_SUB_CHOLA_ADMIN", "subtopicName": "Imperial Cholas: Local self-government system (Uttiramerur inscription), maritime trade, bronze art", "timeEstimateMinutes": 100 }
+              ]
+            }
+          ]
+        },
+        {
+          "chapterId": "HIST_CH_3",
+          "chapterName": "Medieval Indian History",
+          "topics": [
+            {
+              "topicId": "HIST_TOPIC_SULTANATE_MUGHAL",
+              "topicName": "Delhi Sultanate & Mughal Empire",
+              "yieldType": "HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 9,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "Delhi Sultanate Mughal Administration Terms UPSC",
+              "subtopics": [
+                { "subtopicId": "HIST_SUB_SULTANATE_ADMIN", "subtopicName": "Administrative departments (Diwan-i-Arz, Diwan-i-Insha), Iqtadari land system reforms", "timeEstimateMinutes": 100 },
+                { "subtopicId": "HIST_SUB_MUGHAL_MANSAB", "subtopicName": "Mughal administrative machinery, Mansabdari system, Zabti/Dahsala land assessment systems", "timeEstimateMinutes": 120 },
+                { "subtopicId": "HIST_SUB_MEDIEVAL_ART", "subtopicName": "Architectural developments under Indo-Islamic styles, Mughal miniature paintings schools", "timeEstimateMinutes": 90 }
+              ]
+            },
+            {
+              "topicId": "HIST_TOPIC_VIJAYANAGARA_BHAKTI",
+              "topicName": "Vijayanagara Empire & Bhakti-Sufi Movements",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "MEDIUM",
+              "pyqFrequency": 12,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "Vijayanagara Empire Bhakti Sufi Saints UPSC",
+              "subtopics": [
+                { "subtopicId": "HIST_SUB_VIJAYANAGARA", "subtopicName": "Vijayanagara: Administration (Nayankara system), capital architectural layout Hampi, foreign travelers accounts", "timeEstimateMinutes": 120 },
+                { "subtopicId": "HIST_SUB_BHAKTI_SUFI", "subtopicName": "Saints, philosophies (Alvars, Nayanars, Shankara, Ramanuja, Kabir, Guru Nanak), Sufi Silsilas (Chishti, Suhrawardy)", "timeEstimateMinutes": 100 }
+              ]
+            }
+          ]
+        },
+        {
+          "chapterId": "HIST_CH_4",
+          "chapterName": "Modern Indian History & Freedom Struggle",
+          "topics": [
+            {
+              "topicId": "HIST_TOPIC_EARLY_BRITISH",
+              "topicName": "British Expansion & Economic Impact",
+              "yieldType": "HIGH",
+              "difficulty": "MEDIUM",
+              "pyqFrequency": 7,
+              "lastAskedYear": 2024,
+              "revisionCountRequired": 3,
+              "searchQuery": "British Land Revenue Policies Economic Drain UPSC",
+              "subtopics": [
+                { "subtopicId": "HIST_SUB_LAND_REVENUE", "subtopicName": "Permanent Settlement, Ryotwari, and Mahalwari agrarian systems features and impact", "timeEstimateMinutes": 90 },
+                { "subtopicId": "HIST_SUB_ECONOMIC_DRAIN", "subtopicName": "De-industrialization, Commercialization of agriculture, Dadabhai Naoroji's Drain Theory", "timeEstimateMinutes": 75 },
+                { "subtopicId": "HIST_SUB_REVOLT_1857", "subtopicName": "Revolt of 1857: Causes, centers, leaders mapping, reasons for failure, administrative aftermath", "timeEstimateMinutes": 90 }
+              ]
+            },
+            {
+              "topicId": "HIST_TOPIC_FREEDOM_STRUGGLE_TIMELINE",
+              "topicName": "Freedom Struggle Phase Timeline",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 16,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 5,
+              "searchQuery": "Indian Freedom Struggle Timeline Moderates Extremists Gandhian Era UPSC",
+              "subtopics": [
+                { "subtopicId": "HIST_SUB_EARLY_PHASE", "subtopicName": "Pre-INC associations, INC foundation (1885), Moderates vs Extremists goals and techniques", "timeEstimateMinutes": 100 },
+                { "subtopicId": "HIST_SUB_SWADESHI_REVOLUTIONARY", "subtopicName": "Partition of Bengal (1905), Swadeshi Movement, Surat Split (1907), Revolutionary Phase-I", "timeEstimateMinutes": 120 },
+                { "subtopicId": "HIST_SUB_GANDHIAN_MASS_MOVEMENTS", "subtopicName": "Champaran, Kheda, Ahmedabad Satyagraha, Non-Cooperation, Civil Disobedience, Quit India Movements", "timeEstimateMinutes": 180 },
+                { "subtopicId": "HIST_SUB_REVOLUTIONARY_II_INA", "subtopicName": "HRA, HSRA (Bhagat Singh), Revolutionary Phase-II, INA (Subhas Chandra Bose), RIN Mutiny 1946", "timeEstimateMinutes": 120 },
+                { "subtopicId": "HIST_SUB_TRIBAL_PEASANT_UPRISINGS", "subtopicName": "Major historical context of significant uprisings (Santhal rebellion, Munda Ulgulan, Indigo revolt)", "timeEstimateMinutes": 70 }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "subjectId": "SUB_GEOGRAPHY",
+      "subjectName": "Geography",
+      "priority": 4,
+      "chapters": [
+        {
+          "chapterId": "GEO_CH_1",
+          "chapterName": "Mathematical & Physical Climatology",
+          "topics": [
+            {
+              "topicId": "GEO_TOPIC_LAT_LONG_TIME_ZONES",
+              "topicName": "Latitude, Longitude & Time Zones",
+              "yieldType": "MEDIUM",
+              "difficulty": "EASY",
+              "pyqFrequency": 5,
+              "lastAskedYear": 2024,
+              "revisionCountRequired": 2,
+              "searchQuery": "Latitude Longitude International Date Line Time Zones UPSC",
+              "subtopics": [
+                { "subtopicId": "GEO_SUB_LAT_LONG_CONCEPTS", "subtopicName": "Great circles, Small circles, Solstices, Equinoxes mathematical geography", "timeEstimateMinutes": 60 },
+                { "subtopicId": "GEO_SUB_IDL_MATH", "subtopicName": "International Date Line mechanics, Time Zones calculations, Prime Meridian intersections", "timeEstimateMinutes": 75 },
+                { "subtopicId": "GEO_SUB_GLOBAL_MAPPING_LINES", "subtopicName": "Country list passing through Equator, Tropic of Cancer, Capricorn, Prime Meridian mapping", "timeEstimateMinutes": 90 }
+              ]
+            },
+            {
+              "topicId": "GEO_TOPIC_GEOMORPHOLOGY",
+              "topicName": "Geomorphology & Earth Interior",
+              "yieldType": "HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 8,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "Earth Interior Plate Tectonics Fluvial Landforms UPSC",
+              "subtopics": [
+                { "subtopicId": "GEO_SUB_EARTH_INTERIOR", "subtopicName": "Crust, Mantle, Core physical states, discontinuities mapping, P-wave and S-wave shadow zones", "timeEstimateMinutes": 90 },
+                { "subtopicId": "GEO_SUB_TECTONICS", "subtopicName": "Continental Drift Theory, Sea Floor Spreading, Plate Tectonics mechanics, plate boundaries types", "timeEstimateMinutes": 100 },
+                { "subtopicId": "GEO_SUB_LANDFORMS", "subtopicName": "Fluvial, Karst, Aeolian, Glacial erosional and depositional landforms classification", "timeEstimateMinutes": 100 }
+              ]
+            },
+            {
+              "topicId": "GEO_TOPIC_CLIMATOLOGY",
+              "topicName": "Climatology, Oceans & Global Anomalies",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 12,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "Atmosphere Pressure Belts El Nino Ocean Currents UPSC",
+              "subtopics": [
+                { "subtopicId": "GEO_SUB_ATMOSPHERE_LAYERS", "subtopicName": "Atmospheric structure composition, insolation heat budget dynamics", "timeEstimateMinutes": 75 },
+                { "subtopicId": "GEO_SUB_PRESSURE_WINDS", "subtopicName": "Planetary Pressure Belts, tri-cellular model (Hadley, Ferrel, Polar), local winds mapping", "timeEstimateMinutes": 90 },
+                { "subtopicId": "GEO_SUB_ENSO_MODOKI_IOD", "subtopicName": "Walker circulation, El Niño, La Niña, El Niño Modoki, Indian Ocean Dipole mechanics", "timeEstimateMinutes": 120 },
+                { "subtopicId": "GEO_SUB_OCEAN_CURRENTS", "subtopicName": "Atlantic, Pacific, Indian ocean warm and cold currents system, salinity factors", "timeEstimateMinutes": 90 }
+              ]
+            }
+          ]
+        },
+        {
+          "chapterId": "GEO_CH_ADD_INDIAN_GEOGRAPHY_EXPANDED",
+          "chapterName": "Expanded Indian Geography: Physiography, Climate & Resources",
+          "topics": [
+            {
+              "topicId": "GEO_TOPIC_INDIAN_PHYSIOGRAPHY_DRAINAGE",
+              "topicName": "Physiographic Divisions & Complete Drainage System",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 21,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 5,
+              "searchQuery": "Himalayas Peninsular Plateau River Systems Drainage Mapping UPSC",
+              "subtopics": [
+                { "subtopicId": "GEO_SUB_PHYSIO_DIVISIONS", "subtopicName": "Himalayas (Structural divisions, syntaxial bends), Northern Plains, Peninsular Plateau, Coastal Plains & Island Networks", "timeEstimateMinutes": 150 },
+                { "subtopicId": "GEO_SUB_DRAINAGE_HIMALAYAN", "subtopicName": "Indus, Ganga, Brahmaputra systems: Tributaries, left/right bank matching, antecedent features", "timeEstimateMinutes": 120 },
+                { "subtopicId": "GEO_SUB_DRAINAGE_PENINSULAR", "subtopicName": "East flowing (Godavari, Krishna, Cauvery) vs West flowing (Narmada, Tapi) systems, river capture & estuaries", "timeEstimateMinutes": 110 },
+                { "subtopicId": "GEO_SUB_PASSES_PEAKS", "subtopicName": "Mountain Passes (Zoji La, Shipki La, Nathu La, Thal/Bhor/Pal Ghat) & Highest Peaks absolute tracking", "timeEstimateMinutes": 90 }
+              ]
+            },
+            {
+              "topicId": "GEO_TOPIC_INDIAN_CLIMATE_SOILS",
+              "topicName": "Indian Monsoon, Soils & Natural Vegetation",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 16,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "Indian Monsoon Mechanism Koppen Classification Soil Types India UPSC",
+              "subtopics": [
+                { "subtopicId": "GEO_SUB_MONSOON_MECHANISM", "subtopicName": "Monsoon onset/withdrawal mechanics, Tibetan Plateau heating, Jet Streams (TEJ & STWJ) & Western Disturbances", "timeEstimateMinutes": 120 },
+                { "subtopicId": "GEO_SUB_KOPKEN_VEGETATION", "subtopicName": "Koppen's Climatic Classification of India & Natural Vegetation types (Tropical Evergreen to Alpine properties)", "timeEstimateMinutes": 100 },
+                { "subtopicId": "GEO_SUB_SOILS_ICAR", "subtopicName": "ICAR Soil Classification (Alluvial, Black, Red, Laterite, etc.): Mineral deficiencies and core structural profiles", "timeEstimateMinutes": 75 }
+              ]
+            },
+            {
+              "topicId": "GEO_TOPIC_MINERALS_AGRICULTURE_GEOG",
+              "topicName": "Mineral Resources & Spatial Agriculture Distribution",
+              "yieldType": "HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 14,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "Mineral Belts India Cropping Patterns Agro Climatic Zones UPSC",
+              "subtopics": [
+                { "subtopicId": "GEO_SUB_MINERAL_BELTS", "subtopicName": "Macro-level mapping of major mineral belts (Chhota Nagpur, Mid-Western, Southern belts) for key resources like Iron, Coal, and Manganese", "timeEstimateMinutes": 80 },
+                { "subtopicId": "GEO_SUB_CROPPING_SPATIAL", "subtopicName": "Major Cropping Patterns and broad geographical constraints for Rice, Wheat, Cotton, and Sugarcane", "timeEstimateMinutes": 70 }
+              ]
+            },
+            {
+              "topicId": "GEO_TOPIC_AGRICULTURE_CORE",
+              "topicName": "Core Agriculture Mechanics & Cropping Dynamics",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 20,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 5,
+              "searchQuery": "Cropping Seasons Irrigation Methods Major Crops India UPSC",
+              "subtopics": [
+                { "subtopicId": "GEO_SUB_CROPPING_SEASONS", "subtopicName": "Cropping Seasons: Detailed parameter tracking of Kharif, Rabi, and Zaid systems across geographical coordinates", "timeEstimateMinutes": 75 },
+                { "subtopicId": "GEO_SUB_IRRIGATION_METHODS", "subtopicName": "Irrigation technology: Micro-irrigation (Drip, Sprinkler), canal mechanics, efficiency parameters, and water productivity metrics", "timeEstimateMinutes": 90 },
+                { "subtopicId": "GEO_SUB_CROP_SOIL_MATCH", "subtopicName": "Major Crops and Soil Matching: Physical/chemical soil attributes required for optimal cultivation of Rice, Wheat, Cotton, Sugarcane, Pulses, and Oilseeds", "timeEstimateMinutes": 100 },
+                { "subtopicId": "GEO_SUB_CROPPING_PATTERNS", "subtopicName": "Cropping Pattern shifts: Monoculture, crop rotation, mixed cropping, and geo-climatic constraints", "timeEstimateMinutes": 80 }
+              ]
+            }
+          ]
+        },
+        {
+          "chapterId": "GEO_CH_2",
+          "chapterName": "Disaster & Systematic Regional Mapping",
+          "topics": [
+            {
+              "topicId": "GEO_TOPIC_DISASTER_GEOGRAPHY",
+              "topicName": "Disaster Geography Processes",
+              "yieldType": "HIGH",
+              "difficulty": "MEDIUM",
+              "pyqFrequency": 6,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 3,
+              "searchQuery": "Earthquakes Cyclones Landslides Mapping UPSC",
+              "subtopics": [
+                { "subtopicId": "GEO_SUB_EARTHQUAKE_ZONING", "subtopicName": "Seismic zones mapping of India, Tsunami generation physics, Landslide hazard zoning criteria", "timeEstimateMinutes": 90 },
+                { "subtopicId": "GEO_SUB_CYCLONE_DYNAMICS", "subtopicName": "Tropical Cyclones thermal requirements, structure (Eye, Wall), Temperate Cyclones fronts comparison", "timeEstimateMinutes": 100 }
+              ]
+            },
+            {
+              "topicId": "GEO_TOPIC_WORLD_MAPPING_PLACES",
+              "topicName": "World Mapping & Geopolitics",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 13,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "World Mapping Strategic Straits Seas Places in News UPSC",
+              "subtopics": [
+                { "subtopicId": "GEO_SUB_STRATEGIC_SEAS", "subtopicName": "Mediterranean, Red Sea, Caspian Sea, Black Sea littoral countries check and mapping", "timeEstimateMinutes": 120 },
+                { "subtopicId": "GEO_SUB_GLOBAL_CHOKEPOINTS", "subtopicName": "Straits (Malacca, Hormuz, Bab-el-Mandeb, Bosphorus, Gibraltar, Taiwan Strait) location mapping", "timeEstimateMinutes": 90 },
+                { "subtopicId": "GEO_SUB_WORLD_RIVERS", "subtopicName": "Important Rivers of the World: Spatial tracking, drainage basins, and strategic delta systems (Nile, Amazon, Mekong, Danube, Yangtze etc.)", "timeEstimateMinutes": 100 },
+                { "subtopicId": "GEO_SUB_COUNTRIES_IN_NEWS", "subtopicName": "Countries in News Mapping: Geopolitical conflicts, shifting boundaries, strategic islands, and territorial dispute sectors", "timeEstimateMinutes": 110 }
+              ]
+            },
+            {
+              "topicId": "GEO_TOPIC_DOMESTIC_SPATIAL_MAPPING",
+              "topicName": "Domestic Protected Network & Heritage Mapping",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 25,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 5,
+              "searchQuery": "National Parks Biosphere Reserves Ramsar Sites Mapping India UPSC",
+              "subtopics": [
+                { "subtopicId": "GEO_SUB_NP_MAPPING", "subtopicName": "National Parks Spatial Mapping: Physical geography overlays, river paths passing through, and key vegetation tags across India", "timeEstimateMinutes": 150 },
+                { "subtopicId": "GEO_SUB_BR_MAPPING", "subtopicName": "Biosphere Reserves Spatial Mapping: Core boundaries, contiguous sanctuary networks, and topographical coordinates", "timeEstimateMinutes": 110 },
+                { "subtopicId": "GEO_SUB_RAMSAR_MAPPING", "subtopicName": "Ramsar Sites Spatial Mapping: Hydrological channels, river basins, and wetland distribution classification maps", "timeEstimateMinutes": 130 },
+                { "subtopicId": "GEO_SUB_UNESCO_NATURAL_HERITAGE", "subtopicName": "UNESCO Natural Heritage Sites: Strict geographical tracking of Indian biological and physical formations under conservation status", "timeEstimateMinutes": 90 }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "subjectId": "SUB_ENVIRONMENT",
+      "subjectName": "Environment & Ecology",
+      "priority": 5,
+      "chapters": [
+        {
+          "chapterId": "ENV_CH_1",
+          "chapterName": "Ecological Principles & Resource Economics",
+          "topics": [
+            {
+              "topicId": "ENV_TOPIC_ECOLOGY_FUNDAMENTALS",
+              "topicName": "Ecology & Ecosystem Function",
+              "yieldType": "HIGH",
+              "difficulty": "MEDIUM",
+              "pyqFrequency": 8,
+              "lastAskedYear": 2024,
+              "revisionCountRequired": 3,
+              "searchQuery": "Ecosystem Energy Flow Biogeochemical Cycles Trophic Levels UPSC",
+              "subtopics": [
+                { "subtopicId": "ENV_SUB_TROPHIC_ENERGY", "subtopicName": "Food chains, food webs, ecological pyramids, 10% energy flow law, Ecotone, Ecological Niche", "timeEstimateMinutes": 90 },
+                { "subtopicId": "ENV_SUB_BIOGEOCHEMICAL", "subtopicName": "Gaseous and sedimentary nutrient cycles (Carbon, Nitrogen, Phosphorus, Sulphur mechanisms)", "timeEstimateMinutes": 90 }
+              ]
+            },
+            {
+              "topicId": "ENV_TOPIC_WETLANDS_ECOSYSTEMS",
+              "topicName": "Wetlands & Mangroves Conservation",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "MEDIUM",
+              "pyqFrequency": 14,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "Ramsar Sites Mangroves MISHTI India Mapping UPSC",
+              "subtopics": [
+                { "subtopicId": "ENV_SUB_RAMSAR_CONVENTION", "subtopicName": "Ramsar definition, Montreux Record, geographical distribution of Indian Ramsar wetlands mapping", "timeEstimateMinutes": 120 },
+                { "subtopicId": "ENV_SUB_MANGROVE_ADAPTATIONS", "subtopicName": "Halophytes adaptations, ecological protective role, Sundarbans, Bhitarkanika mapping, MISHTI scheme parameters", "timeEstimateMinutes": 90 }
+              ]
+            },
+            {
+              "topicId": "ENV_TOPIC_CAMPA_GREEN_ACCOUNTING",
+              "topicName": "CAMPA & Environmental Economics",
+              "yieldType": "MEDIUM",
+              "difficulty": "HARD",
+              "pyqFrequency": 4,
+              "lastAskedYear": 2023,
+              "revisionCountRequired": 3,
+              "searchQuery": "CAMPA Act Green Bonds Carbon Markets UPSC",
+              "subtopics": [
+                { "subtopicId": "ENV_SUB_CAMPA_MECHANISM", "subtopicName": "Compensatory Afforestation Fund Act 2016 statutory setup, National vs State funds allocation ratios", "timeEstimateMinutes": 75 },
+                { "subtopicId": "ENV_SUB_GREEN_ECONOMY_FINANCE", "subtopicName": "Green GDP accounting, Carbon Credits trading mechanisms, Sovereign Green Bonds framework in India", "timeEstimateMinutes": 90 }
+              ]
+            },
+            {
+              "topicId": "ENV_TOPIC_ECOLOGICAL_DYNAMICS_SPECIES",
+              "topicName": "Ecological Succession & Specialized Species Frameworks",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "MEDIUM",
+              "pyqFrequency": 17,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "Ecological Succession Keystone Indicator Species UPSC",
+              "subtopics": [
+                { "subtopicId": "ENV_SUB_ECO_SUCCESSION", "subtopicName": "Ecological Succession mechanics: Primary vs Secondary succession, Pioneer communities, Nudation, Seral stages, and Climax communities", "timeEstimateMinutes": 90 },
+                { "subtopicId": "ENV_SUB_SPECIES_CLASSIFICATION", "subtopicName": "Functional classification of biological entities: Keystone, Umbrella, Indicator, Flagship, Endemic, and Exotic/Invasive Species definitions and Indian test cases", "timeEstimateMinutes": 110 },
+                { "subtopicId": "ENV_SUB_ECO_INDICATORS", "subtopicName": "Ecological Indicators: Bio-monitoring frameworks, lichens, benthic organisms, and biotic index tracking models", "timeEstimateMinutes": 75 }
+              ]
+            }
+          ]
+        },
+        {
+          "chapterId": "ENV_CH_ADD_BIODIVERSITY_PROTECTED_AREAS",
+          "chapterName": "Expanded Biodiversity & Protected Area Network",
+          "topics": [
+            {
+              "topicId": "ENV_TOPIC_BIODIVERSITY_CONCEPTS",
+              "topicName": "Biodiversity Concepts, Hotspots & Threats",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "MEDIUM",
+              "pyqFrequency": 15,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "Biodiversity Alpha Beta Gamma Diversity Hotspots India UPSC",
+              "subtopics": [
+                { "subtopicId": "ENV_SUB_DIV_MEASUREMENT", "subtopicName": "Alpha, Beta, and Gamma Diversity concepts, Bio-geographic zones of India", "timeEstimateMinutes": 75 },
+                { "subtopicId": "ENV_SUB_HOTSPOTS_CRITERIA", "subtopicName": "Biodiversity Hotspots (4 zones in India: Western Ghats, Himalayas, Indo-Burma, Sundaland) & Hope Spots", "timeEstimateMinutes": 90 },
+                { "subtopicId": "ENV_SUB_INVASIVE_SPECIES", "subtopicName": "Invasive Alien Species (Lantana camara, Water Hyacinth, etc.) & IUCN Red List critical Indian species tracking", "timeEstimateMinutes": 100 }
+              ]
+            },
+            {
+              "topicId": "ENV_TOPIC_PROTECTED_AREAS_NETWORK",
+              "topicName": "Protected Area Network (PAN) Framework",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 23,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 5,
+              "searchQuery": "National Parks Wildlife Sanctuaries Biosphere Reserves Tiger Reserves Map UPSC",
+              "subtopics": [
+                { "subtopicId": "ENV_SUB_PAN_LEGAL", "subtopicName": "National Parks vs Wildlife Sanctuaries vs Conservation Reserves: Legal variations under WPA 1972", "timeEstimateMinutes": 90 },
+                { "subtopicId": "ENV_SUB_BIOSPHERE_RESERVES", "subtopicName": "Biosphere Reserves structure (Core, Buffer, Transition), MAB Programme & macro-level mapping of prominent Indian entries", "timeEstimateMinutes": 80 },
+                { "subtopicId": "ENV_SUB_SPECIES_PROJECTS", "subtopicName": "Core statutory aspects of Project Tiger (NTCA directives) and Project Elephant without micro-reserve tracking", "timeEstimateMinutes": 70 }
+              ]
+            }
+          ]
+        },
+        {
+          "chapterId": "ENV_CH_2",
+          "chapterName": "Environmental Governance, Laws & Institutions",
+          "topics": [
+            {
+              "topicId": "ENV_TOPIC_STATUTORY_ACTS_INDIA",
+              "topicName": "Domestic Environmental Legislation",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 12,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 5,
+              "searchQuery": "Wildlife Protection Act Environment Protection Act NGT UPSC",
+              "subtopics": [
+                { "subtopicId": "ENV_SUB_WPA_1972", "subtopicName": "Wildlife Protection Act 1972: Rationalized schedules (Schedule I, II) and core statutory authorities setup", "timeEstimateMinutes": 100 },
+                { "subtopicId": "ENV_SUB_EPA_FCA", "subtopicName": "Environment Protection Act 1986, Forest Conservation Act amendments, Biological Diversity Act structures", "timeEstimateMinutes": 100 },
+                { "subtopicId": "ENV_SUB_NGT_POLLUTION", "subtopicName": "National Green Tribunal (NGT) powers, Air Act 1981, Water Act 1974, Central Pollution Control Board (CPCB)", "timeEstimateMinutes": 90 }
+              ]
+            },
+            {
+              "topicId": "ENV_TOPIC_INTERNATIONAL_CONVENTIONS",
+              "topicName": "International Environmental Governance",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 13,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 5,
+              "searchQuery": "UNFCCC COP Decisions IUCN CITES CBD UPSC",
+              "subtopics": [
+                { "subtopicId": "ENV_SUB_UNFCCC_COP", "subtopicName": "UNFCCC historical matrix: Kyoto Protocol, Paris Agreement, latest climate change COP declarations and goals", "timeEstimateMinutes": 120 },
+                { "subtopicId": "ENV_SUB_IUCN_CITES_CBD", "subtopicName": "IUCN red list categories, CITES appendices rules, Convention on Biological Diversity (CBD) Protocols (Nagoya, Cartwright)", "timeEstimateMinutes": 120 },
+                { "subtopicId": "ENV_SUB_HAZARDOUS_WASTE", "subtopicName": "Basel, Rotterdam, Stockholm conventions, Vienna convention & Montreal Protocol ozone protection", "timeEstimateMinutes": 90 }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "subjectId": "SUB_SCIENCE_TECH",
+      "subjectName": "Science & Technology",
+      "priority": 6,
+      "chapters": [
+        {
+          "chapterId": "ST_CH_1",
+          "chapterName": "Frontier Technology & Bio-Sciences",
+          "topics": [
+            {
+              "topicId": "ST_TOPIC_QUANTUM_SYNTHETIC_BIO",
+              "topicName": "Quantum Tech & Synthetic Biology Innovations",
+              "yieldType": "HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 9,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "Quantum Computing Superposition CRISPR Gene Editing UPSC",
+              "subtopics": [
+                { "subtopicId": "ST_SUB_QUANTUM_PRINCIPLES", "subtopicName": "Superposition, Entanglement, Qubits vs Classical bits, National Quantum Mission architecture", "timeEstimateMinutes": 120 },
+                { "subtopicId": "ST_SUB_GENE_EDITING", "subtopicName": "CRISPR-Cas9 mechanism, Somatic vs Germline editing, Synthetic Biology engineering ethics and regulations", "timeEstimateMinutes": 120 }
+              ]
+            },
+            {
+              "topicId": "ST_TOPIC_ENERGY_CRITICAL_RESOURCES",
+              "topicName": "Alternative Energy & Strategic Minerals",
+              "yieldType": "HIGH",
+              "difficulty": "MEDIUM",
+              "pyqFrequency": 7,
+              "lastAskedYear": 2024,
+              "revisionCountRequired": 3,
+              "searchQuery": "Green Hydrogen Extraction Rare Earth Elements Industrial Uses UPSC",
+              "subtopics": [
+                { "subtopicId": "ST_SUB_GREEN_HYDROGEN_TECH", "subtopicName": "Electrolyzer technology, Grey, Blue, Turquoise vs Green Hydrogen, National Green Hydrogen Mission blueprint", "timeEstimateMinutes": 100 },
+                { "subtopicId": "ST_SUB_REE_APPLICATIONS", "subtopicName": "17 Rare Earth Elements chemistry, strategic clean energy applications, global supply monopoly alternatives", "timeEstimateMinutes": 90 }
+              ]
+            },
+            {
+              "topicId": "ST_TOPIC_AI_COMPUTING_WEB3",
+              "topicName": "Artificial Intelligence & Decentralized Systems",
+              "yieldType": "HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 8,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "Generative AI LLM Architecture Blockchain Web3 Smart Contracts UPSC",
+              "subtopics": [
+                { "subtopicId": "ST_SUB_GEN_AI_LLMS", "subtopicName": "Neural networks, Generative AI mechanics, Foundation LLMs transformer architecture, Deepfakes tech footprint", "timeEstimateMinutes": 100 },
+                { "subtopicId": "ST_SUB_BLOCKCHAIN_APPLICATIONS", "subtopicName": "Distributed Ledger Technology consensus algorithms, Smart Contracts engine, Web3 architecture properties", "timeEstimateMinutes": 90 }
+              ]
+            },
+            {
+              "topicId": "ST_TOPIC_BIOTECH_CORE_BASICS",
+              "topicName": "Biotechnology Basics & Cellular Machinery",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 18,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 5,
+              "searchQuery": "DNA RNA Structure Stem Cells Biotechnology UPSC",
+              "subtopics": [
+                { "subtopicId": "ST_SUB_NUCLEIC_ACIDS", "subtopicName": "DNA & RNA Molecular Structure: Structural variants, replication, transcription, translation machinery, and Chromosomes layout", "timeEstimateMinutes": 120 },
+                { "subtopicId": "ST_SUB_VACCINE_TECH", "subtopicName": "Vaccines: Conventional inactivation models vs next-generation mRNA Vaccines engineering, vectors, and safety parameters", "timeEstimateMinutes": 110 },
+                { "subtopicId": "ST_SUB_STEM_CELLS", "subtopicName": "Stem Cells: Totipotent, Pluripotent, Multipotent variants, Induced Pluripotent Stem Cells (iPSC) tech, and therapeutic application boundaries", "timeEstimateMinutes": 100 },
+                { "subtopicId": "ST_SUB_BIOTECH_APPLICATIONS", "subtopicName": "Agricultural Biotechnology Basics: Transgenic traits, GM crops safety protocols, GEAC regulation machinery", "timeEstimateMinutes": 90 }
+              ]
+            },
+            {
+              "topicId": "ST_TOPIC_HARDWARE_NUCLEAR_COMM",
+              "topicName": "Semiconductors, Nanotech, Nuclear & Communication Systems",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 15,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "Semiconductors Nanotechnology Nuclear Reactors Communication Tech UPSC",
+              "subtopics": [
+                { "subtopicId": "ST_SUB_SEMICONDUCTORS", "subtopicName": "Semiconductors fabrication: Silicon wafers lithography, bandgap engineering, and India Semiconductor Mission nodes", "timeEstimateMinutes": 90 },
+                { "subtopicId": "ST_SUB_NANOTECH", "subtopicName": "Nanotechnology: Carbon nanotubes, quantum dots properties, nanomedicine applications, and toxicity issues", "timeEstimateMinutes": 85 },
+                { "subtopicId": "ST_SUB_NUCLEAR_TECH", "subtopicName": "Nuclear Technology: Fission vs Fusion physics, India's Three-Stage Nuclear Power Programme, and Nuclear Reactors coolant/moderator parameters", "timeEstimateMinutes": 120 },
+                { "subtopicId": "ST_SUB_COMM_TECH", "subtopicName": "Communication Technologies: Spectrum bands, 5G vs 6G infrastructure, WiFi 7, LiFi, and satellite broadband engineering parameters", "timeEstimateMinutes": 100 }
+              ]
+            }
+          ]
+        },
+        {
+          "chapterId": "ST_CH_2",
+          "chapterName": "Space Technology & Defence Systems",
+          "topics": [
+            {
+              "topicId": "ST_TOPIC_SPACE_PROPULSION_NAVIC",
+              "topicName": "Space Technology & Orbit Machinery",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 11,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "NavIC Constellation LEO GEO Orbits Space Debris UPSC",
+              "subtopics": [
+                { "subtopicId": "ST_SUB_NAVIC_ARCHITECTURE", "subtopicName": "IRNSS/NavIC constellation mapping (3 Geostationary + 4 Geosynchronous satellites payload setup)", "timeEstimateMinutes": 90 },
+                { "subtopicId": "ST_SUB_ORBIT_TYPES_LAUNCHERS", "subtopicName": "LEO, MEO, GEO, SSO orbit metrics, PSLV vs GSLV Mk-III vs SSLV propulsion stages", "timeEstimateMinutes": 110 },
+                { "subtopicId": "ST_SUB_SPACE_DEBRIS_MITIGATION", "subtopicName": "Kessler Syndrome physics, ISRO Project NETRA, IS4OM setup, private sector IN-SPACe nodes", "timeEstimateMinutes": 80 },
+                { "subtopicId": "ST_SUB_ISRO_MISSIONS", "subtopicName": "Space Missions (ISRO): Deep-space exploration engines, planetary probes, and immediate mission architectures tracking", "timeEstimateMinutes": 100 }
+              ]
+            },
+            {
+              "topicId": "ST_TOPIC_DEFENCE_MISSILES",
+              "topicName": "Defence Systems Technology",
+              "yieldType": "MEDIUM",
+              "difficulty": "MEDIUM",
+              "pyqFrequency": 5,
+              "lastAskedYear": 2024,
+              "revisionCountRequired": 3,
+              "searchQuery": "Ballistic Cruise Missiles IGMDP Stealth Technology UPSC",
+              "subtopics": [
+                { "subtopicId": "ST_SUB_MISSILE_SYSTEMS", "subtopicName": "Ballistic vs Cruise Missiles, Ramjet vs Scramjet technology, IGMDP missile family (Agni, Prithvi, Akash)", "timeEstimateMinutes": 90 },
+                { "subtopicId": "ST_SUB_STEALTH_S400", "subtopicName": "Stealth technology mechanisms, S-400 air defence architecture, nuclear submarine technology", "timeEstimateMinutes": 75 }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "subjectId": "SUB_CSAT",
+      "subjectName": "Civil Services Aptitude Test (CSAT)",
+      "priority": 7,
+      "chapters": [
+        {
+          "chapterId": "CSAT_CH_1",
+          "chapterName": "Quantitative Aptitude & Numerical Ability",
+          "topics": [
+            {
+              "topicId": "CSAT_TOPIC_NUMBER_SYSTEM",
+              "topicName": "Number System & Core Arithmetic",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 25,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 5,
+              "searchQuery": "Number System Permutation Combination CSAT UPSC",
+              "subtopics": [
+                { "subtopicId": "CSAT_SUB_NUM_PROPERTIES", "subtopicName": "Divisibility rules, Remainder theorem, Unit digit calculation, LCM & HCF advanced properties", "timeEstimateMinutes": 150 },
+                { "subtopicId": "CSAT_SUB_PERM_COMB", "subtopicName": "Permutations and Combinations fundamentals, Probability rules & linear/circular arrangements", "timeEstimateMinutes": 180 },
+                { "subtopicId": "CSAT_SUB_PERCENT_RATIO", "subtopicName": "Percentages, Profit & Loss, Ratio & Proportion, Partnerships & Averages", "timeEstimateMinutes": 120 }
+              ]
+            },
+            {
+              "topicId": "CSAT_TOPIC_COMMERCIAL_MATH",
+              "topicName": "Time, Speed, Distance & Work Dynamics",
+              "yieldType": "HIGH",
+              "difficulty": "MEDIUM",
+              "pyqFrequency": 14,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "Time Speed Distance Work CSAT UPSC",
+              "subtopics": [
+                { "subtopicId": "CSAT_SUB_TIME_SPEED_DIST", "subtopicName": "Relative Speed, Trains problems, Boats & Streams, Circular tracks physics concepts", "timeEstimateMinutes": 110 },
+                { "subtopicId": "CSAT_SUB_TIME_WORK", "subtopicName": "Work & Wages, Pipes & Cisterns efficiency mechanics, alternate days patterns", "timeEstimateMinutes": 100 }
+              ]
+            }
+          ]
+        },
+        {
+          "chapterId": "CSAT_CH_2",
+          "chapterName": "Logical Reasoning & Analytical Ability",
+          "topics": [
+            {
+              "topicId": "CSAT_TOPIC_LOGICAL_PUZZLES",
+              "topicName": "Analytical Reasoning & Puzzles",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 18,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 4,
+              "searchQuery": "Seating Arrangement Syllogism Blood Relations CSAT UPSC",
+              "subtopics": [
+                { "subtopicId": "CSAT_SUB_SEATING_ARRANGEMENT", "subtopicName": "Linear, Circular & Matrix Puzzles data sufficiency matching", "timeEstimateMinutes": 130 },
+                { "subtopicId": "CSAT_SUB_SYLLOGISM_CRITICAL", "subtopicName": "Syllogisms (Standard Venn Diagrams), Statement-Assumption, Statement-Conclusion validations", "timeEstimateMinutes": 100 },
+                { "subtopicId": "CSAT_SUB_BLOOD_DIRECTION", "subtopicName": "Blood Relations coded trees, Direction Sense tests, Coding-Decoding matrix rules", "timeEstimateMinutes": 90 }
+              ]
+            }
+          ]
+        },
+        {
+          "chapterId": "CSAT_CH_3",
+          "chapterName": "Reading Comprehension",
+          "topics": [
+            {
+              "topicId": "CSAT_TOPIC_RC_STRATEGIES",
+              "topicName": "Critical Reading & Inference Analysis",
+              "yieldType": "VERY_HIGH",
+              "difficulty": "HARD",
+              "pyqFrequency": 27,
+              "lastAskedYear": 2025,
+              "revisionCountRequired": 3,
+              "searchQuery": "Reading Comprehension Inferences Assumptions CSAT UPSC",
+              "subtopics": [
+                { "subtopicId": "CSAT_SUB_RC_INFERENCE", "subtopicName": "Identifying Crucial Message, Corollary, Central Idea, and Underlying Assumptions in dense passages", "timeEstimateMinutes": 180 }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -55,6 +55,7 @@ class SessionViewModel @Inject constructor(
     private val auth: FirebaseAuth,
     private val antiCheatManager: com.studyplanner.app.core.util.AntiCheatManager,
     private val musicManager: com.studyplanner.app.core.util.StudyMusicManager,
+    private val notificationHelper: com.studyplanner.app.core.util.NotificationHelper,
     @dagger.hilt.android.qualifiers.ApplicationContext private val context: android.content.Context,
 ) : ViewModel() {
 
@@ -274,8 +275,10 @@ class SessionViewModel @Inject constructor(
     }
 
     private fun startBreak() {
-        musicManager.pause()   // break pe pause
+        musicManager.pause()
         val breakMs = _state.value.breakMinutes * 60 * 1000L
+        // Break start notification
+        notificationHelper.showBreakReminder(_state.value.breakMinutes)
         _state.update {
             it.copy(
                 isBreak = true,

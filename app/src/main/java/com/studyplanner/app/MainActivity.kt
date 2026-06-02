@@ -33,21 +33,34 @@ class MainActivity : ComponentActivity() {
     ) { granted ->
         android.util.Log.d("Permission", "POST_NOTIFICATIONS granted=$granted")
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        // Android 13+ pe notification permission maango
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                != PackageManager.PERMISSION_GRANTED
+            ) {
+                notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
         }
+
+        // Notification se aaya sessionId (agar koi hai)
+        val intentSessionId = intent?.getLongExtra("open_session_id", -1L) ?: -1L
+
         setContent {
             val appTheme by themeManager.currentTheme.collectAsStateWithLifecycle(AppThemes.default)
             val bgStyle by themeManager.currentBgStyle.collectAsStateWithLifecycle(BgAnimationStyle.GRADIENT_FLOW)
 
             StudyPlannerTheme(appTheme = appTheme, bgStyle = bgStyle) {
                 val startDestination = remember {
-                    if (auth.currentUser != null) Route.Home.path else Route.Launch.path
+                    when {
+                        intentSessionId > 0 -> Route.Session.go(intentSessionId) // notification tap
+                        auth.currentUser != null -> Route.Home.path
+                        else -> Route.Launch.path
+                    }
                 }
                 StudyPlannerNavGraph(startDestination = startDestination)
             }

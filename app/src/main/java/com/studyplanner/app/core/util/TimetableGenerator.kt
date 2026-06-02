@@ -18,6 +18,8 @@ class TimetableGenerator @Inject constructor(
     private val studySlotDao: StudySlotDao,
     private val personalRoutineDao: PersonalRoutineDao,
     private val breakSettingsDao: BreakSettingsDao,
+    private val alarmScheduler: com.studyplanner.app.core.util.AlarmScheduler,
+    private val userDao: com.studyplanner.app.core.data.local.dao.UserDao,
 ) {
     suspend fun generate(uid: String, targetDate: Long) {
         Log.d(TAG, "=== GENERATE START === uid=$uid targetDate=$targetDate")
@@ -91,6 +93,14 @@ class TimetableGenerator @Inject constructor(
 
         scheduled.forEach { sessionDao.upsert(it) }
         Log.d(TAG, "=== GENERATE DONE === ${scheduled.size} sessions saved")
+
+        // Har upcoming session ka alarm schedule karo (10 min pehle)
+        val userName = userDao.get(uid)?.name?.split(" ")?.firstOrNull() ?: "Student"
+        val now = System.currentTimeMillis()
+        scheduled.filter { it.scheduledStartTime > now + 60_000L }.forEach { session ->
+            alarmScheduler.scheduleSessionReminder(session, userName, minutesBefore = 10)
+        }
+        Log.d(TAG, "Alarms scheduled for ${scheduled.count { it.scheduledStartTime > now }} sessions")
     }
 
     /** kitne study-blocks chahiye for `mins` minutes (har block = `block` min) */

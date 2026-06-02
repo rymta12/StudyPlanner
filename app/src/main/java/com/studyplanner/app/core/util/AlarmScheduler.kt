@@ -28,6 +28,7 @@ class AlarmScheduler @Inject constructor(
 
         val intent = Intent(context, SessionReminderReceiver::class.java).apply {
             putExtra("session_id", session.id)
+            putExtra("topic_name", "Study Session")
             putExtra("user_name", userName)
             putExtra("minutes_before", minutesBefore)
         }
@@ -35,8 +36,20 @@ class AlarmScheduler @Inject constructor(
             context, session.id.toInt(), intent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
-        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAt, pi)
+        // setAlarmClock: highest priority alarm — DND bypass, status bar clock icon, screen wake
+        val showIntent = PendingIntent.getActivity(
+            context, 0,
+            android.content.Intent(context, com.studyplanner.app.MainActivity::class.java)
+                .addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK),
+            PendingIntent.FLAG_IMMUTABLE
+        )
+        alarmManager.setAlarmClock(AlarmManager.AlarmClockInfo(triggerAt, showIntent), pi)
+        android.util.Log.d(
+            "AlarmScheduler",
+            "setAlarmClock: session=${session.id} in ${minutesBefore}min"
+        )
     }
+
 
     fun cancelSessionReminder(sessionId: Long) {
         val intent = Intent(context, SessionReminderReceiver::class.java)

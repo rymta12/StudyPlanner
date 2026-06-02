@@ -26,6 +26,7 @@ import com.studyplanner.app.core.util.AlarmScheduler
 import com.studyplanner.app.core.util.AntiCheatManager
 import com.studyplanner.app.core.util.DistractionBlocker
 import com.studyplanner.app.core.util.GamificationManager
+import com.studyplanner.app.core.util.NotificationHelper
 import com.studyplanner.app.core.util.PremiumManager
 import com.studyplanner.app.core.util.ReschedulingEngine
 import com.studyplanner.app.core.util.StreakManager
@@ -135,7 +136,9 @@ object AppModule {
         userDao: UserDao,
         sessionDao: SessionDao,
         streakDao: StreakDao,
-    ) = GamificationManager(auth, fs, userDao, sessionDao, streakDao)
+        notificationHelper: NotificationHelper,
+
+        ) = GamificationManager(auth, fs, userDao, sessionDao, streakDao, notificationHelper)
 
     @Provides @Singleton
     fun provideStreakManager(
